@@ -1,0 +1,48 @@
+@CHARSET "UTF-8";
+
+/* 모바일 */
+@media screen and (max-width:400px){
+	
+	
+}
+
+/* 모바일 외 */
+@media screen and (min-width:400px){
+	
+	article{
+		margin:0 auto;
+		
+	}
+	#mainImg {
+		position: relative;
+		width: 100%;
+		min-width: 1000px;
+		height: 335px;
+		border-top: 1px solid black;
+		border-bottom: 1px solid #3C3C3C;
+		
+		overflow: hidden;
+		
+	}
+	
+	#mainImgFade {
+		position:absolute;
+		width: 1920px;
+		height:335px;
+		margin-left: -960px;
+		margin-right:auto;
+		left:50%;
+		
+	}
+	
+	#mainBoard {
+		margin: 0 auto;
+		width: 960px;
+	}
+	
+	#mainBoard div{
+		float: left;
+	}
+	
+	
+}

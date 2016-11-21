@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+
+/* 모바일 */
+@media screen and (max-width:400px){
+	
+	
+}
+
+/* 모바일 외 */
+@media screen and (min-width:400px){
+	header {
+		padding-top:10px;
+		width: 960px;
+/* 		min-height: 100px; */
+		overflow: hidden;
+/* 		background-color: gray; */
+		margin: 0 auto;
+	}
+	
+	header ul li {
+		float: left;
+	}
+	
+	#logo {
+		float: left;
+	}
+		
+	#tnb {
+		height:100%;
+		overflow:hidden;
+		float: right;
+	}
+	#tnb ul li a {
+		margin : 0 5px 0 5px;
+		font-size: .8em;
+	}
+	
+	#gnb {
+		float:left;
+		height:100%;
+		overflow:hidden;
+		margin:20px 0px 10px 50px;
+	}
+	#gnb ul li a {
+		margin : 0 10px 0 10px;
+		font-weight: bolder;
+		
+	}
+	
+	
+	
+}
