@@ -12,5 +12,8 @@ public class MainController {
 		return "main/main";
 	}
 	
-	
+	@RequestMapping("/kakao.do")
+	public String kakao(){
+		return "kakaoTest";
+	}
 }

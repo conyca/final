@@ -1,16 +1,19 @@
 @CHARSET "UTF-8";
 
 /* 모바일 */
-@media screen and (max-width:400px){
+@media screen and (max-width:736px){
+	
+	article{
+		display: none;
+	}
 	
 	
 }
 
 /* 모바일 외 */
-@media screen and (min-width:400px){
+@media screen and (min-width:737px){
 	
 	article{
-		min-height: 1000px;
 		
 	}
 	#mainImg {
@@ -29,13 +32,17 @@
 		position:absolute;
 		width: 1920px;
 		height:335px;
-		margin-left: -960px;
+		margin-left: -970px;
 		margin-right:auto;
 		left:50%;
+		background-image: url("../../img/main/main/main2.png");
 		
 	}
 	
 	#mainBoard {
+/* 		border-left: 1px solid #BBBBBB; */
+/* 		border-right: 1px solid #BBBBBB; */
+		padding : 30px 0 40px 0;
 		margin: 0 auto;
 		width: 960px;
 		height: 100%;
@@ -45,7 +52,37 @@
 	
 	#mainBoard div{
 		float: left;
+		width: 50%;
+		margin: 30px -20px 30px 20px;
+	}
+	#mainBoard div table{
+		font-size:.8em;
+		border-collapse: collapse;
+		width: 90%;
+		border-top: 2px solid #E0E0E0;
+		border-bottom: 1px solid #E0E0E0;
+	}
+	#mainBoard div table tr td,th{
+/* 		border: 1px solid; */
+		height: 30px;
+	}
+	#mainBoard div table tr td:FIRST-CHILD{
+		width:70%;
+	}
+	#mainBoard div table tr td{
+		padding-left : 4px;
+		border-bottom: 1px dotted #E0E0E0;
+	}
+	#mainBoard div table tr:FIRST-CHILD  {
+		background-color: #E5E5E5;
+		color : white;
 	}
 	
-	
+	#mainBoard div span:LAST-CHILD{
+		display: block;
+		margin: 5px 45px 0 0;
+		float: right;
+		font-size: 10px;
+		color: #BBBBBB;
+	}
 }

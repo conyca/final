@@ -1,13 +1,68 @@
 @CHARSET "UTF-8";
 
 /* 모바일 */
-@media screen and (max-width:400px){
+@media screen and (max-width:736px){
+	#logo {
+		margin-top:30px;
+		width: 200px;
+		float: left;
+	}
+	#tnb {
+		margin-top:35px;
+		float: right;
+		font-size: 10px;
+	}
+	#tnb ul li {
+		float: left;
+	}
+	#tnb ul li a {
+		margin : 0 5px 0 5px;
+	}
+	
+	
+	#gnb {
+		clear: both;
+		width: 100%;
+	}
+	#gnb ul li {
+		float: left;
+		display: block;
+		width : 50%;
+		height: 250px;
+		text-indent : -99999px;
+		box-sizing: border-box;
+		border: 1px solid #E0E0E0;
+	}
+	#gnb ul li:FIRST-CHILD {
+		display: none;
+		
+	}
+	#gnb ul li:NTH-CHILD(2) {
+		background-image: url("../../img/main/header/teacher.png");
+		background-position : -20px 0px;
+		background-size: cover;
+	}
+	#gnb ul li:NTH-CHILD(3) {
+		background-image: url("../../img/main/header/parent.png");
+		background-position : -20px 0px;
+		background-size: cover;
+	}
+	#gnb ul li:NTH-CHILD(4) {
+		background-image: url("../../img/main/header/student.png");
+		background-position : -20px 0px;
+		background-size: cover;
+	}
+	#gnb ul li:NTH-CHILD(5) {
+		background-image: url("../../img/main/header/community.png");
+		background-position : -20px 0px;
+		background-size: cover;
+	}
 	
 	
 }
 
 /* 모바일 외 */
-@media screen and (min-width:400px){
+@media screen and (min-width:737px){
 	header {
 		padding-top:10px;
 		width: 960px;
