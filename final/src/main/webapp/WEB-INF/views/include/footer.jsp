@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 
 	<footer>
-		<div></div>
-		<div></div>
-		<div></div>
-		<div></div>
+		<div>
+			<img src="./resources/img/main/header/logo.png">
+		</div>
+		<address>
+			
+		</address>
 	</footer>
 </body>
 </html>

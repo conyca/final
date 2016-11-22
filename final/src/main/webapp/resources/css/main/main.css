@@ -10,7 +10,7 @@
 @media screen and (min-width:400px){
 	
 	article{
-		margin:0 auto;
+		min-height: 1000px;
 		
 	}
 	#mainImg {
@@ -38,6 +38,9 @@
 	#mainBoard {
 		margin: 0 auto;
 		width: 960px;
+		height: 100%;
+		overflow: hidden;
+		min-height: 200px;
 	}
 	
 	#mainBoard div{
