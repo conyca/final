@@ -20,7 +20,7 @@
 				</c:when>
 				<c:otherwise>
 					<li><a>로그인</a></li>
-					<li><a>회원가입</a></li>
+					<li><a href="joinForm.do">회원가입</a></li>
 					<li><a>고객센터</a></li>
 				</c:otherwise>
 			</c:choose>

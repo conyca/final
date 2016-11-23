@@ -4,6 +4,7 @@
 @media screen and (max-width:736px){
 	#logo {
 		margin-top:30px;
+		margin-bottom:20px;
 		width: 200px;
 		float: left;
 	}
@@ -14,6 +15,7 @@
 	}
 	#tnb ul li {
 		float: left;
+		
 	}
 	#tnb ul li a {
 		margin : 0 5px 0 5px;
@@ -21,37 +23,35 @@
 	
 	
 	#gnb {
+		margin-top:20px;
 		clear: both;
 		width: 100%;
+		
 	}
 	#gnb ul li {
 		float: left;
 		display: block;
 		width : 50%;
-		height: 250px;
-		text-indent : -99999px;
+		height: 30px;
 		box-sizing: border-box;
 		border: 1px solid #E0E0E0;
+		font-size:15px;
+		font-weight:bold;
+		color:#999;
+		text-align: center;
+		padding-top: 7px;
 	}
 	#gnb ul li:FIRST-CHILD {
 		display: none;
 		
 	}
 	#gnb ul li:NTH-CHILD(2) {
-		background-image: url("../../img/main/header/teacher.png");
-		background-size: 100% 100%;
 	}
 	#gnb ul li:NTH-CHILD(3) {
-		background-image: url("../../img/main/header/parent.png");
-		background-size: 100% 100%;
 	}
 	#gnb ul li:NTH-CHILD(4) {
-		background-image: url("../../img/main/header/student.png");
-		background-size: 100% 100%;
 	}
 	#gnb ul li:NTH-CHILD(5) {
-		background-image: url("../../img/main/header/community.png");
-		background-size: 100% 100%;
 	}
 	
 	

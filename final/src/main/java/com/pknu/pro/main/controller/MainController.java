@@ -12,6 +12,13 @@ public class MainController {
 		return "main/main";
 	}
 	
+	@RequestMapping("/joinForm.do")
+	public String joinForm(){
+		
+		return "join/join";
+	}
+	
+	//카카오 테스트
 	@RequestMapping("/kakao.do")
 	public String kakao(){
 		return "kakaoTest";
