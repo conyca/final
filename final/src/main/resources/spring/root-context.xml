@@ -40,7 +40,7 @@
 	</bean> 	
 	
 	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="bbsDao">
-	  <property name="mapperInterface" value="com.pknu.bbs.dao.BBSDao" />		
+	  <property name="mapperInterface" value="com.pknu.pro.main.dao.MemberDao" />		
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	

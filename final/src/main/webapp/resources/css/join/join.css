@@ -239,8 +239,15 @@
 	    
 	}
 	
+	.error {
+	    margin: 3px 0 3px 1px;
+	    font-size: 12px;
+	    color: #f00;
+	}
 	
-	
+	.gm {
+		color: #2eaa08;
+	}
 	
 	
 	

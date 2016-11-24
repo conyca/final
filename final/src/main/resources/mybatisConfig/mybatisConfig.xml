@@ -18,7 +18,7 @@
 	</settings>
 	
 	<typeAliases>
-<!-- 	    <typeAlias alias="article" type="com.pknu.bbs.dto.BBSDto" /> -->
+	    <typeAlias alias="member" type="com.pknu.pro.main.dto.MemberDto" />
 	</typeAliases>
 	
 <!-- 	<mappers> -->

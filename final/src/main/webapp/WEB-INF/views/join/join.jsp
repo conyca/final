@@ -59,6 +59,63 @@
 		return true;
 	}
 	
+	function checkId(event){
+		toggleLabel('idLb', 'id', 'out');
+
+		var id = document.getElementById("id").value;
+		var oMsg = document.getElementById("idMsg");
+		if (id == "") {
+			oMsg.style.display = "block";
+			oMsg.className = "error";
+			oMsg.innerHTML = "필수 정보입니다.";
+			lua_do('join_kr'+document.getElementById("platform").value,'',ERROR_ID_REQUIRED, document.getElementById("token_sjoin").value, true,'');
+			lua_do2('join_kr'+document.getElementById("platform").value,'',ERROR_ID_REQUIRED+";keyboard^"+log2.sb(), document.getElementById("token_sjoin").value, true, document.getElementById("id").value);
+			return false;
+		}
+		
+	    var isID = /^[a-z0-9][a-z0-9_\-]{4,19}$/;
+		if (!isID.test(id)) {
+			oMsg.style.display = "block";
+			oMsg.className = "error";
+			oMsg.innerHTML = "5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.";
+			lua_do('join_kr'+document.getElementById("platform").value,'',ERROR_FORMAT_ID, document.getElementById("token_sjoin").value, true,'');
+			return false;
+		}
+		idFlag = false;
+		alert(id);
+		$.ajax({
+			url: "/final/joinIdCheck.do",
+			data : {id:id},
+			type : "POST",
+			async : true,
+			dataType : "json",
+			error: function(xhr){
+				alert("실패 ㅠㅠ" + xhr.statusText);
+			},
+			success:function(data){
+				if(data=="Y"){
+					if (event == "first") {
+						oMsg.style.display = "block";
+						oMsg.className = "error gm";
+						oMsg.innerHTML = "멋진 아이디네요!";
+					} else {
+						oMsg.style.display = "none";
+					}
+					idFlag = true;
+					return true;
+				}else{
+					oMsg.style.display = "block";
+					oMsg.className = "error";
+					oMsg.innerHTML = "이미 사용중이거나 탈퇴한 아이디입니다.";
+					return false;
+				}
+			}
+			
+			
+		});
+		return true;
+		
+	}
 	
 </script>
 </head>
@@ -75,7 +132,7 @@
 					<div id="idDiv" class="joinRow">
 					<!-- 아이디 name id -->
 						<span class="psBox">
-							<input type="text" id="id" name="id" class="int" onfocus="toggleLabel('idLb','id', 'in');" onfocus="toggleLabel('idLb','id', 'out')" placeholder="아이디">
+							<input type="text" id="id" name="id" class="int" onfocus="toggleLabel('idLb','id', 'in');" onblur="toggleLabel('idLb','id', 'out'); checkId();" placeholder="아이디">
 							<label id ="idLb" for="id" class="lbl">아이디</label>
 						</span>
 						<div id="idMsg" class="error" style="display: none;">필수 정보입니다.</div>
