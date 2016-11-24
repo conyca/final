@@ -46,12 +46,16 @@
 		
 	}
 	#gnb ul li:NTH-CHILD(2) {
+		border-top: 2px solid #E0E0E0;
 	}
 	#gnb ul li:NTH-CHILD(3) {
+		border-top: 2px solid #E0E0E0;
 	}
 	#gnb ul li:NTH-CHILD(4) {
+		border-bottom: 2px solid #E0E0E0;
 	}
 	#gnb ul li:NTH-CHILD(5) {
+		border-bottom: 2px solid #E0E0E0;
 	}
 	
 	

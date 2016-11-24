@@ -160,13 +160,24 @@
 					<div id="emailDiv" class="joinRow joinEmail">
 						<span class="psBox">
 							<input type="text" id="email" name="email" maxlength="100" onfocus="toggleLabel('emailLb','email','in');" onblur="toggleLabel('emailLb','email','out');checkEmail('check')" placeholder="이메일" class="int">
-							<label id="emailLb" for="email" class="lbl">비상연락용 이메일</label>
+							<label id="emailLb" for="email" class="lbl">이메일</label>
 						</span>
 						<div id="emailMsg" class="error" style="display:none">필수 정보입니다.</div>
 					</div>
 					
+					<div id="mobnoDiv" class="joinRow">
+						<span class="psBox">
+							<input type="text" id="mobno" name="mobno" maxlength="16" onfocus="toggleLabel('mobnoLb','mobno','in');" onblur="toggleLabel('mobnoLb','mobno','out');checkMobno('check')" placeholder="휴대전화번호" class="int">
+							<label id="mobnoLb" for="mobno" class="lbl">휴대전화번호</label>
+						</span>
+					</div>
+					<div id="mobnoMsg" class="error" style="display: none;">필수 정보입니다.</div>
 				</div>
+			
 			</fieldset>
+			<span class="btnJoin">
+				<input type="submit" onclick="clickcr(this, 'sup.signup', '', '', event);" title="회원가입" alt="회원가입" value="가입하기" class="intJoin">
+			</span>
 		</form>
 	</div>
 	

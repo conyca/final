@@ -220,8 +220,24 @@
     	background: url(/final/resources/img/join/back.jpg) no-repeat;
 	}
 	
+	.btnJoin {
+	    display: block;
+	    height: 61px;
+	    margin: 33px 0 19px;
+	    margin: 10px 0 19px\9;
+	    background: #999;
+	}
 	
-	
+	.intJoin {
+		background: #999 url(/final/resources/img/join/joinSubmit.png) no-repeat;
+		background-position : 50%;
+		background-size : 30% 60%;
+		width: 100%;
+	    border: 1px solid #999;
+	    height: 61px;
+	    text-indent: -999em;
+	    
+	}
 	
 	
 	

@@ -108,7 +108,93 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-	
+		
+		<!-- 		Mybatis -->		
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.0</version>
+		</dependency>
+		
+		<!-- 		FileUpload -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.2</version>
+		</dependency>		
+		<!-- 		JSON -->
+		<!-- @ResponseBody 사용시에는 아래 디펜던시만 있으면 됨 -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.8.3</version>
+		</dependency>
+
+		
+		<!-- MappingJacksonJsonView 사용시에는 아래 디펜던시만를 추가해야 함  -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib -->
+		<!-- 섬네일 이미지 만들기 -->
+		<dependency>
+		    <groupId>org.imgscalr</groupId>
+		    <artifactId>imgscalr-lib</artifactId>
+		    <version>4.2</version>
+		</dependency>
+		
+		<!-- 		ORM -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>	
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>${org.aspectj-version}</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jms -->
+		<!-- jms 이용시 필요 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jms</artifactId>
+		    <version>4.3.3.RELEASE</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.activemq/activemq-all -->
+		<dependency>
+		    <groupId>org.apache.activemq</groupId>
+		    <artifactId>activemq-spring</artifactId>
+		    <version>5.14.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.apache.xbean/xbean-spring -->
+		<dependency>
+		    <groupId>org.apache.xbean</groupId>
+		    <artifactId>xbean-spring</artifactId>
+		    <version>4.5</version>
+		</dependency> 
+		
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
