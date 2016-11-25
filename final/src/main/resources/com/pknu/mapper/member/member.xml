@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+              
+<mapper namespace="com.pknu.pro.main.dao.MemberDao">
+	<select id="joinIdCheck" parameterType="String" resultType="int">
+		SELECT count(id) 
+		FROM member 
+		WHERE id = #{id} 
+	</select>
+	
+	<select id="joinEmailCheck" parameterType="String" resultType="int">
+		SELECT count(email) 
+		FROM member 
+		WHERE email = #{email}
+	</select>
+	
+	<select id="joinMobnoCheck" parameterType="String" resultType="int">
+		SELECT count(mobno) 
+		FROM member 
+		WHERE mobno = #{mobno}
+	</select>
+	
+	<insert id="join" parameterType="member">
+		INSERT INTO member 
+		VALUES ( MEM_SEQ.NEXTVAL, #{id}, #{pass}, #{name}, #{sex}, #{birthday},#{email}, #{mobno},
+		#{status},#{category}, sysdate, null, null)
+	</insert>
+</mapper>

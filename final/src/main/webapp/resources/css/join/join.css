@@ -250,10 +250,14 @@
 	}
 	
 	
+	.errorCh {
+	    padding: 9px 0 4px;
+	    text-align: center;
+	}
 	
-	
-	
-	
+	.errorCh .error {
+		margin: 0;
+	}	
 	
 	
 	

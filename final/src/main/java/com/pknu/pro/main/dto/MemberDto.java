@@ -4,18 +4,28 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MemberDto {
+	
 	private int memberNo;
 	private String id;
 	private String pass;
 	private String name;
 	private int sex;
 	private String birthday;
+	private String email;
 	private String mobno;
 	private String status;
 	private int category;
 	private String regDate;
 	private String adjDate;
 	private int dataNo;
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -88,6 +98,16 @@ public class MemberDto {
 	public void setDataNo(int dataNo) {
 		this.dataNo = dataNo;
 	}
+	@Override
+	public String toString() {
+		return "MemberDto [memberNo=" + memberNo + ", id=" + id + ", pass=" + pass + ", name=" + name + ", sex=" + sex
+				+ ", birthday=" + birthday + ", email=" + email + ", mobno=" + mobno + ", status=" + status
+				+ ", category=" + category + ", regDate=" + regDate + ", adjDate=" + adjDate + ", dataNo=" + dataNo
+				+ "]";
+	}
+	
+	
+	
 	
 	
 }

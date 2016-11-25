@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.pknu.pro.main.dto.MemberDto;
 import com.pknu.pro.main.service.MainService;
 
 @Controller
@@ -27,12 +28,13 @@ public class MainController {
 		return "join/join";
 	}
 	
-	@RequestMapping("joinIdCheck.do")
-	@ResponseBody
-	public String joinIdCheck(String id, Model model){
-		model.addAttribute("result", mainService.joinIdCheck(id));
-		return "JSON";
+	@RequestMapping("/join.do")
+	public String join(MemberDto memberDto){
+		mainService.join(memberDto);
+		return "main/main";
 	}
+	
+	
 	
 	//카카오 테스트
 	@RequestMapping("/kakao.do")
