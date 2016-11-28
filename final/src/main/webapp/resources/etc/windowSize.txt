@@ -1,0 +1,5 @@
+	function test(){
+		console.log("width : " + document.body.clientWidth);
+		console.log("height : " + document.body.clientHeight);
+	}
+	window.onresize = test;

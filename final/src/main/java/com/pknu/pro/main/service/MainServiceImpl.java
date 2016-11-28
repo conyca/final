@@ -1,5 +1,8 @@
 package com.pknu.pro.main.service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -54,14 +57,84 @@ public class MainServiceImpl implements MainService {
 		
 		return result;
 	}
+	
+	
 
 	@Override
-	public String join(MemberDto memberDto) {
+	public String joinForm(HttpSession session, HttpServletRequest request, Model model) {
+		String id = (String)session.getAttribute("id");
+		String returnUrl = request.getHeader("referer");
+		if(id!=null){
+			model.addAttribute("message","잘못된 접근입니다.");
+			model.addAttribute("url", "main.do");
+			return "etc/message";
+		}
+		model.addAttribute("returnUrl", returnUrl);
+		return "member/join";
+	}
+
+	@Override
+	public String join(MemberDto memberDto, String returnUrl, Model model) {
 		memberDto.setStatus(MemberStatus.NOMAL);
 		memberDto.setCategory(MemberCategory.NOMAL);
 		mainDao.join(memberDto);
-		
-		return null;
+		model.addAttribute("returnUrl",returnUrl);
+		return "member/login";
+	}
+
+	@Override
+	public String loginForm(HttpServletRequest request, Model model, String returnUrl, HttpSession session){
+		String id = (String)session.getAttribute("id");
+		if(id != null){
+			model.addAttribute("message", "잘못된 접근입니다..");
+			model.addAttribute("url", "main.do");
+			return "etc/message";
+		}
+		if(returnUrl!=null){
+			model.addAttribute("returnUrl", returnUrl);
+		}else{
+			model.addAttribute("returnUrl", request.getHeader("referer"));
+		}
+		model.addAttribute("mainUrl","main.do");
+		return "member/login";
+	}
+
+	@Override
+	public String login(HttpSession session, String id, String pass , String returnUrl, Model model) {
+		String url ="";
+		String resultPass = mainDao.login(id);
+		if(resultPass != null){
+			if(resultPass.equals(pass)){//로그인
+				url="redirect:"+returnUrl;
+				session.setAttribute("id", id);
+			}else{//비번틀림
+				url="etc/message";
+				model.addAttribute("returnUrl", returnUrl);
+				model.addAttribute("url", "loginForm.do");
+				model.addAttribute("message", "비밀번호가 틀렸습니다.");
+			}
+		}else{//아이디 없음?
+			url="etc/message";
+			model.addAttribute("returnUrl", returnUrl);
+			model.addAttribute("url", "loginForm.do");
+			model.addAttribute("message", "없는 아이디 입니다.");
+		}
+		return url;
+	}
+
+	@Override
+	public String logout(HttpSession session, HttpServletRequest request, Model model) {
+		String returnUrl=request.getHeader("referer");
+		String id = (String)session.getAttribute("id");
+		if(id != null){
+			session.removeAttribute("id");
+			model.addAttribute("message", "로그아웃 되었습니다.");
+			model.addAttribute("url", returnUrl);
+		}else{
+			model.addAttribute("message", "잘못된 접근입니다..");
+			model.addAttribute("url", returnUrl);
+		}
+		return "etc/message";
 	}
 	
 	

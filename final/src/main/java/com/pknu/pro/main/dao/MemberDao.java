@@ -7,4 +7,5 @@ public interface MemberDao {
 	public int joinEmailCheck(String email);
 	public int joinMobnoCheck(String mobno);
 	public void join(MemberDto memberDto);
+	public String login(String id);
 }

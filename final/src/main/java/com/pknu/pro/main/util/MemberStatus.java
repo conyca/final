@@ -1,6 +1,8 @@
 package com.pknu.pro.main.util;
 
 public interface MemberStatus {
+	
+	
 	public String NOMAL = "nomal";
 	// 일반회원
 	

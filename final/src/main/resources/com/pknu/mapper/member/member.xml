@@ -26,4 +26,9 @@
 		VALUES ( MEM_SEQ.NEXTVAL, #{id}, #{pass}, #{name}, #{sex}, #{birthday},#{email}, #{mobno},
 		#{status},#{category}, sysdate, null, null)
 	</insert>
+	
+	<select id="login" parameterType="String" resultType="String">
+		SELECT pass FROM member
+		WHERE id = #{id}
+	</select>
 </mapper>
