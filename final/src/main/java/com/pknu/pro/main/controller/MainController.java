@@ -42,13 +42,20 @@ public class MainController {
 	
 	@RequestMapping("/login.do")
 	public String login(HttpSession session, String id, String pass , String returnUrl, Model model){
-		return mainService.login(session,pass,id,returnUrl,model);
+		return mainService.login(session,id,pass,returnUrl,model);
 	}
 	
 	@RequestMapping("/logout.do")
 	public String logout(HttpSession session, HttpServletRequest request, Model model){
 		return mainService.logout(session, request, model);
 	}
+	
+	@RequestMapping("/findIdForm.do")
+	public String findIdForm(HttpSession session, HttpServletRequest request,String returnUrl,  Model model){
+		return mainService.findIdForm(session, request,returnUrl, model);
+	}
+	
+	
 	
 	//카카오 테스트
 	@RequestMapping("/kakao.do")

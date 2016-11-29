@@ -19,8 +19,8 @@
 					<li><a href="logout.do">로그아웃</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="loginForm.do">로그인</a></li>
-					<li><a href="joinForm.do">회원가입</a></li>
+					<li><a href="loginForm.do?returnUrl=${returnUrl }">로그인</a></li>
+					<li><a href="joinForm.do?returnUrl=${returnUrl }">회원가입</a></li>
 					<li><a>고객센터</a></li>
 				</c:otherwise>
 			</c:choose>

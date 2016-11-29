@@ -11,6 +11,7 @@ import com.pknu.pro.main.dao.MemberDao;
 import com.pknu.pro.main.dto.MemberDto;
 import com.pknu.pro.main.util.MemberCategory;
 import com.pknu.pro.main.util.MemberStatus;
+import com.pknu.pro.main.util.ReturnUrl;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -69,7 +70,7 @@ public class MainServiceImpl implements MainService {
 			model.addAttribute("url", "main.do");
 			return "etc/message";
 		}
-		model.addAttribute("returnUrl", returnUrl);
+		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
 		return "member/join";
 	}
 
@@ -90,11 +91,19 @@ public class MainServiceImpl implements MainService {
 			model.addAttribute("url", "main.do");
 			return "etc/message";
 		}
-		if(returnUrl!=null){
-			model.addAttribute("returnUrl", returnUrl);
-		}else{
-			model.addAttribute("returnUrl", request.getHeader("referer"));
-		}
+		
+		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
+		
+//		if(returnUrl!=null && returnUrl.length()!= 0){
+//			if(returnUrl.indexOf('?')>0){
+//				returnUrl=returnUrl.substring(returnUrl.indexOf('=')+1);
+//			}
+//			System.out.println("true");
+//			model.addAttribute("returnUrl", returnUrl);
+//		}else{
+//			System.out.println("false");
+//			model.addAttribute("returnUrl", request.getHeader("referer"));
+//		}
 		model.addAttribute("mainUrl","main.do");
 		return "member/login";
 	}
@@ -102,6 +111,7 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public String login(HttpSession session, String id, String pass , String returnUrl, Model model) {
 		String url ="";
+		System.out.println("id: " + id);
 		String resultPass = mainDao.login(id);
 		if(resultPass != null){
 			if(resultPass.equals(pass)){//로그인
@@ -136,6 +146,24 @@ public class MainServiceImpl implements MainService {
 		}
 		return "etc/message";
 	}
+
+	@Override
+	public String findIdForm(HttpSession session, HttpServletRequest request, String returnUrl, Model model) {
+		String id = (String)session.getAttribute("id");
+		if(id != null){
+			model.addAttribute("message", "잘못된 접근입니다..");
+			model.addAttribute("url", "main.do");
+			return "etc/message";
+		}
+		
+		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
+		
+		
+		
+		return "member/findId";
+	}
+
+	
 	
 	
 	

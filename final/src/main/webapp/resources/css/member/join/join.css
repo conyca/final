@@ -6,7 +6,7 @@
 	article {
 		min-height : 500px;
 		width : 100%;
-		margin : 100px auto 0 auto;
+		margin : 150px auto 0 auto;
 	}
 	
 	.content {
@@ -46,17 +46,7 @@
 	    background: #fff
 	}
 	
-	.int{
-		position: relative;
-	    z-index: 10;
-	    padding: 6px 0;
-	    width: 100%;
-	    height: 15px;
-	    border: none;
-	    background: #fff;
-	    font-size: 15px;
-	    font-weight: bold;
-	}
+	
 	
 	.lbl {
 		display:block;
@@ -81,17 +71,7 @@
 		z-index:9;
 	}
 	
-	.blind {
-		visibility: hidden;
-	    overflow: hidden;
-	    position: absolute;
-	    top: 0;
-	    left: 0;
-	    width: 1px;
-	    height: 1px;
-	    font-size: 0;
-	    line-height: 0;
-	}
+	
 	
 	.joinRow {
 		padding: 11px 11px 11px 13px;

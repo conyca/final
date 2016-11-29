@@ -500,7 +500,7 @@
 			if (emailFlag != true) {
 				res = false;
 			}
-			if(checkMobno("check")!= true){
+			if(mobnoFalg!= true){
 				res = false;
 			}
 		}

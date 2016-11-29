@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes">
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <title>행복하니? 행복학원!</title>
-<link rel="stylesheet" href="./resources/css/join/joinStyle.css">
+<link rel="stylesheet" href="./resources/css/member/join/joinStyle.css">
 <script src="./resources/js/jquery/jquery-3.1.1.min.js"></script>
 <script src="./resources/js/member/join.js"></script>
 </head>
