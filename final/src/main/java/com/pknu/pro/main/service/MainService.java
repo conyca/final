@@ -20,4 +20,6 @@ public interface MainService {
 	public String login(HttpSession session, String id, String pass , String returnUrl, Model model);
 	public String logout(HttpSession session, HttpServletRequest request, Model model);
 	public String findIdForm(HttpSession session, HttpServletRequest request,String returnUrl,  Model model);
+	public void findIdMail(String name, String email, Model model);
+	public String numberCheck(String postNum, String inputNum, Model model);
 }

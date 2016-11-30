@@ -19,9 +19,17 @@
 					<li><a href="logout.do">로그아웃</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="loginForm.do?returnUrl=${returnUrl }">로그인</a></li>
-					<li><a href="joinForm.do?returnUrl=${returnUrl }">회원가입</a></li>
-					<li><a>고객센터</a></li>
+					<c:if test="${fn:length(param.returnUrl)>0 }">
+						<li><a href="loginForm.do?returnUrl=${param.returnUrl }">로그인</a></li>
+						<li><a href="joinForm.do?returnUrl=${param.returnUrl }">회원가입</a></li>
+						<li><a>고객센터</a></li>
+					</c:if>
+					<c:if test="${(empty param.returnUrl) or (fn:length(param.returnUrl)==0) }">
+						<li><a href="loginForm.do?returnUrl=${returnUrl }">로그인</a></li>
+						<li><a href="joinForm.do?returnUrl=${returnUrl }">회원가입</a></li>
+						<li><a>고객센터</a></li>
+					</c:if>
+						
 				</c:otherwise>
 			</c:choose>
 		</ul>

@@ -31,4 +31,9 @@
 		SELECT pass FROM member
 		WHERE id = #{id}
 	</select>
+	<select id="emailByName" parameterType="HashMap" resultType="int">
+		SELECT count(name) FROM member 
+		WHERE name = #{name} and email = #{email}
+	</select>
+	
 </mapper>

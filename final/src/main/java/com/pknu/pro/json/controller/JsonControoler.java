@@ -1,4 +1,4 @@
-package com.pknu.pro.json;
+package com.pknu.pro.json.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +9,7 @@ import com.pknu.pro.main.service.MainService;
 
 @Controller
 public class JsonControoler {
+
 
 	@Autowired
 	MainService mainService;
@@ -32,6 +33,18 @@ public class JsonControoler {
 	public String joinMobnoCheck(String mobno, Model model){
 		String result = mainService.joinMobnoCheck(mobno);
 		model.addAttribute("result", result);
+		return "JSON";
+	}
+	
+	@RequestMapping("/findIdMail.json")
+	public String findIdMail(String name, String email, Model model){
+		mainService.findIdMail(name, email, model);
+		return "JSON";
+	}
+	
+	@RequestMapping("numberCheck.json")
+	public String numberCheck(String postNum, String inputNum, Model model){
+		mainService.numberCheck(postNum,inputNum,model);
 		return "JSON";
 	}
 }

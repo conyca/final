@@ -1,5 +1,7 @@
 package com.pknu.pro.main.service;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,9 +11,13 @@ import org.springframework.ui.Model;
 
 import com.pknu.pro.main.dao.MemberDao;
 import com.pknu.pro.main.dto.MemberDto;
+import com.pknu.pro.main.util.MakeMail;
 import com.pknu.pro.main.util.MemberCategory;
 import com.pknu.pro.main.util.MemberStatus;
+import com.pknu.pro.main.util.RandomNumber;
 import com.pknu.pro.main.util.ReturnUrl;
+import com.pknu.pro.main.util.SecurityUtil;
+import com.pknu.pro.main.util.SendMail;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -19,7 +25,14 @@ public class MainServiceImpl implements MainService {
 	@Autowired
 	MemberDao mainDao;
 	
+	@Autowired
+	RandomNumber randomNum;
 	
+	@Autowired
+	SendMail sendMail;
+	
+	@Autowired
+	SecurityUtil securityUtil;
 	
 	@Override
 	public String joinIdCheck(String id) {
@@ -80,7 +93,7 @@ public class MainServiceImpl implements MainService {
 		memberDto.setCategory(MemberCategory.NOMAL);
 		mainDao.join(memberDto);
 		model.addAttribute("returnUrl",returnUrl);
-		return "member/login";
+		return "redirect:loginForm.do";
 	}
 
 	@Override
@@ -91,8 +104,13 @@ public class MainServiceImpl implements MainService {
 			model.addAttribute("url", "main.do");
 			return "etc/message";
 		}
-		
-		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
+		returnUrl = ReturnUrl.returnUrlCheck(returnUrl, request);
+//		System.out.println("returnUrl" + returnUrl);
+//		System.out.println("--->" + returnUrl.substring(returnUrl.lastIndexOf("/")+1,returnUrl.lastIndexOf(".")));
+//		if(returnUrl.substring(returnUrl.lastIndexOf("/")+1,returnUrl.lastIndexOf(".")).equals("loginForm")){
+//			returnUrl = "main.do";
+//		}
+		model.addAttribute("returnUrl", returnUrl);
 		
 //		if(returnUrl!=null && returnUrl.length()!= 0){
 //			if(returnUrl.indexOf('?')>0){
@@ -155,16 +173,41 @@ public class MainServiceImpl implements MainService {
 			model.addAttribute("url", "main.do");
 			return "etc/message";
 		}
-		
 		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
-		
-		
-		
 		return "member/findId";
 	}
 
 	
-	
+	@Override
+	public void findIdMail(String name, String email, Model model) {
+		HashMap<String, String> hm = new HashMap<>();
+		HashMap<String, String> data = new HashMap<>();
+		String result="";
+		hm.put("name", name);
+		hm.put("email", email);
+		int dbResult = mainDao.emailByName(hm);
+		System.out.println(dbResult);
+		if(dbResult > 0 ){
+			String num = randomNum.randomNumber();
+			sendMail.setContent(MakeMail.makeContent(num));
+			sendMail.setSubject(MakeMail.SUBJECT);
+			sendMail.setTo(email);
+			result = sendMail.sendMail();
+			data.put("num", securityUtil.encryptSHA256(num));
+		}else{
+			result = "N";
+		}
+		data.put("result", result);
+		System.out.println("result"+ result);
+		model.addAttribute("data",data);
+	}
+
+	@Override
+	public String numberCheck(String postNum, String inputNum, Model model) {
+		model.addAttribute("result",securityUtil.checkNum(postNum, inputNum));
+		System.out.println(securityUtil.checkNum(postNum, inputNum));
+		return null;
+	}
 	
 	
 	

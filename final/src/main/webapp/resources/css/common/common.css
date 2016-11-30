@@ -58,3 +58,8 @@ img, fieldset{ border: none; }
     text-indent: -999em;
     background: #e4e4e5;
 }
+.error {
+    margin: 3px 0 3px 1px;
+    font-size: 12px;
+    color: #f00;
+}
