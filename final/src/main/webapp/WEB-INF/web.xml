@@ -64,5 +64,17 @@
 		<url-pattern>*.json</url-pattern>
 	</servlet-mapping>
 	
+	
+	<servlet>
+		<servlet-name>JCaptchaServlet</servlet-name>
+		<servlet-class>com.pknu.pro.etc.jcaptcha.servlet.CaptchaServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	 
+	<servlet-mapping>
+		<servlet-name>JCaptchaServlet</servlet-name>
+		<url-pattern>*.test</url-pattern>
+	</servlet-mapping>
+
 
 </web-app>

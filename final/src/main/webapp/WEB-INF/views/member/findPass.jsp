@@ -20,21 +20,19 @@
 	
 	<article>
 		<div>
-			<form action="findId.do"  method ="post" name = "fr">
+			<form action="findPass.do" method="post" name ="fr">
 				<input type="hidden" name = "returnUrl" value="${returnUrl}">
 				<input type="hidden" name = "sbText" >
 				<input type="hidden" name = "sbEmail" >
 				<fieldset>
-					<legend class="blind">아이디 찾기</legend>
-					<div>이름 : 
-						<input type="text" name ="name" id ="name"><br>
-						이메일 :
-						<input type="email" name ="email" id = "email">
-						<input type="button" value="인증번호 받기" onclick="sendMail('id');"><br>
-						<input type="text" value="인증번호 6자 입력" maxlength="6" id ="num" disabled="disabled">
-					</div>
-				</fieldset>
-				
+					<legend class="blind">회원가입</legend>
+					id : 
+					<input type="text" name ="id" id ="id"><br>
+					email : 
+					<input type="email" name ="email" id = "email">
+					<input type="button" value="인증번호 받기" onclick="sendMail('pass');"><br>
+					<input type="text" value="인증번호 6자 입력" maxlength="6" id ="num" disabled="disabled">
+				</fieldset>	
 				<input type="button" value ="확인" onclick="check();">
 			</form>
 		</div>

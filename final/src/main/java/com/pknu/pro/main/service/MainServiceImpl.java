@@ -34,6 +34,8 @@ public class MainServiceImpl implements MainService {
 	@Autowired
 	SecurityUtil securityUtil;
 	
+	MemberDto memberDto;
+	
 	@Override
 	public String joinIdCheck(String id) {
 		String result ="";
@@ -179,11 +181,23 @@ public class MainServiceImpl implements MainService {
 
 	
 	@Override
-	public void findIdMail(String name, String email, Model model) {
+	public void findIdMail(String type, String text, String email, Model model) {
 		HashMap<String, String> hm = new HashMap<>();
 		HashMap<String, String> data = new HashMap<>();
 		String result="";
-		hm.put("name", name);
+		System.out.println(type);
+		System.out.println(text);
+		System.out.println(email);
+		
+		
+		if(type.equals("id")){
+			hm.put("name", text);
+			hm.put("type", type);
+		}else{
+			System.out.println("여기요~~~ : " + text);
+			hm.put("type", type);
+			hm.put("id", text);
+		}
 		hm.put("email", email);
 		int dbResult = mainDao.emailByName(hm);
 		System.out.println(dbResult);
@@ -207,6 +221,47 @@ public class MainServiceImpl implements MainService {
 		model.addAttribute("result",securityUtil.checkNum(postNum, inputNum));
 		System.out.println(securityUtil.checkNum(postNum, inputNum));
 		return null;
+	}
+
+	@Override
+	public String findId(String name, String email, String returnUrl, Model model, HttpServletRequest request) {
+		HashMap<String, String> hm = new HashMap<>();
+		hm.put("name", name);
+		hm.put("email", email);
+		
+		memberDto = mainDao.findId(hm);
+		System.out.println("memDto : " + memberDto);
+		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
+		model.addAttribute("member", memberDto);
+		return "member/findResult";
+	}
+
+	@Override
+	public String findPassForm(HttpSession session, HttpServletRequest request, String returnUrl, Model model) {
+		String id = (String)session.getAttribute("id");
+		if(id != null){
+			model.addAttribute("message", "잘못된 접근입니다..");
+			model.addAttribute("url", "main.do");
+			return "etc/message";
+		}
+		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
+		return "member/findPass";
+	}
+
+	@Override
+	public String findPass(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request) {
+		
+		String dbId = mainDao.findPass(sbEmail);
+		if(!sbText.equals(dbId)){
+			model.addAttribute("message", "잘못된 접근입니다..");
+			model.addAttribute("url", "main.do");
+			return "etc/message";
+		}
+		
+		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
+		model.addAttribute("id", dbId);
+		
+		return "member/changePass";
 	}
 	
 	

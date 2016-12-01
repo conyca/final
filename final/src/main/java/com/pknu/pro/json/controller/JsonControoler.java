@@ -37,8 +37,8 @@ public class JsonControoler {
 	}
 	
 	@RequestMapping("/findIdMail.json")
-	public String findIdMail(String name, String email, Model model){
-		mainService.findIdMail(name, email, model);
+	public String findIdMail(String type, String text, String email, Model model){
+		mainService.findIdMail(type, text, email, model);
 		return "JSON";
 	}
 	

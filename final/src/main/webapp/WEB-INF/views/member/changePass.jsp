@@ -10,9 +10,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes">
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <title>행복하니? 행복학원!</title>
-<link rel="stylesheet" href="./resources/css/member/find/findStyle.css">
+<link rel="stylesheet" href="./resources/css/main/mainStyle.css">
 <script src="./resources/js/jquery/jquery-3.1.1.min.js"></script>
-<script src="./resources/js/member/find.js"></script> 
 </head>
 <body>
 	
@@ -20,23 +19,25 @@
 	
 	<article>
 		<div>
-			<form action="findId.do"  method ="post" name = "fr">
-				<input type="hidden" name = "returnUrl" value="${returnUrl}">
-				<input type="hidden" name = "sbText" >
-				<input type="hidden" name = "sbEmail" >
+			<form action="">
+				
 				<fieldset>
-					<legend class="blind">아이디 찾기</legend>
-					<div>이름 : 
-						<input type="text" name ="name" id ="name"><br>
-						이메일 :
-						<input type="email" name ="email" id = "email">
-						<input type="button" value="인증번호 받기" onclick="sendMail('id');"><br>
-						<input type="text" value="인증번호 6자 입력" maxlength="6" id ="num" disabled="disabled">
+					<legend class="blind">비밀번호 변경</legend>
+					
+					아이디 : <c:out value="${id }"></c:out>
+					<div>
+						<input type ="password" placeholder="새 비밀번호" id="pass" name = "pass">
+						<input type ="password" placeholder="새 비밀번호 확인" id="passCheck">
 					</div>
+					
+					<div>
+						<img src="jcaptcha">
+					</div>
+					
 				</fieldset>
 				
-				<input type="button" value ="확인" onclick="check();">
 			</form>
+		
 		</div>
 		
 	</article>

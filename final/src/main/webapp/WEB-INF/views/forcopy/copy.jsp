@@ -18,7 +18,7 @@
 	<%@ include file="../include/header.jsp" %>
 	
 	<article>
-	
+		
 		
 	</article>
 	

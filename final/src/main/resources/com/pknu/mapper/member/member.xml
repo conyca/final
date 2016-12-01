@@ -31,9 +31,29 @@
 		SELECT pass FROM member
 		WHERE id = #{id}
 	</select>
+	
 	<select id="emailByName" parameterType="HashMap" resultType="int">
+	
 		SELECT count(name) FROM member 
+		WHERE 
+		<if test='type == "id"'>
+		name = #{name} 
+		</if>
+		<if test='type == "pass"'>
+		id = #{id} 
+		</if>
+		and email = #{email}
+	</select>
+	
+	<select id="findId" parameterType="HashMap" resultType="member">
+		SELECT id, to_char(regDate,'YYYY-MM-DD') FROM member 
 		WHERE name = #{name} and email = #{email}
+	</select>
+	
+	<select id="findPass" parameterType="String" resultType="String">
+		SELECT id 
+		FROM member 
+		WHERE email = #{email}
 	</select>
 	
 </mapper>

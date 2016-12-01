@@ -45,7 +45,7 @@
 					<div id = "loginBtnDiv">
 						<a href="findIdForm.do?returnUrl=${returnUrl }">아이디 찾기</a>
 						<span class= "bar">|</span>
-						<a href="">비밀번호 찾기</a>
+						<a href="findPassForm.do?returnUrl=${returnUrl }">비밀번호 찾기</a>
 						<span class= "bar">|</span>
 						<a href="joinForm.do?returnUrl=${returnUrl}">회원가입</a>
 					</div>

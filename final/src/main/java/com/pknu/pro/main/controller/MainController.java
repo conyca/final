@@ -55,8 +55,25 @@ public class MainController {
 		return mainService.findIdForm(session, request,returnUrl, model);
 	}
 	
+	@RequestMapping("/findId.do")
+	public String findId(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request){
+		return mainService.findId(sbText,sbEmail,returnUrl,model,request);
+	}
 	
+	@RequestMapping("/findPassForm.do")
+	public String findPassForm(HttpSession session, HttpServletRequest request,String returnUrl,  Model model){
+		return mainService.findPassForm(session, request,returnUrl, model);
+	}
 	
+	@RequestMapping("/findPass.do")
+	public String findPass(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request){
+		return mainService.findPass(sbText,sbEmail,returnUrl,model,request);
+	}
+	
+	@RequestMapping("test.do")
+	public String test(){
+		return "test";
+	}
 	
 	//카카오 테스트
 	@RequestMapping("/kakao.do")
