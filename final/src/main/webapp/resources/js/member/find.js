@@ -16,7 +16,6 @@
 			str = "아이디를 입력해주세요";
 			
 		}
-		alert(text.value);
 		
 		if(text.value == ""){
 			alert(str);
@@ -61,7 +60,6 @@
 			url : "/final/numberCheck.json",
 			data : {postNum:value,inputNum:num.value},
 			type : "POST",
-			
 			dataType : "json",
 			error: function(xhr){
 				alert("실패 ㅠㅠ" + xhr.statusText);

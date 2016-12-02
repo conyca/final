@@ -12,7 +12,7 @@
 	<div id = "tnb" >
 		<ul>
 			<c:choose>
-				<c:when test="${!empty id }">
+				<c:when test="${!empty sessionScope.id }">
 					<li><a>아이디</a></li>
 					<li><a>마이페이지</a></li>
 					<li><a>고객센터</a></li>

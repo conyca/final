@@ -1,14 +1,17 @@
 package com.pknu.pro.main.service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.pknu.pro.main.captcha.AudioCaptCha;
 import com.pknu.pro.main.dao.MemberDao;
 import com.pknu.pro.main.dto.MemberDto;
 import com.pknu.pro.main.util.MakeMail;
@@ -18,6 +21,8 @@ import com.pknu.pro.main.util.RandomNumber;
 import com.pknu.pro.main.util.ReturnUrl;
 import com.pknu.pro.main.util.SecurityUtil;
 import com.pknu.pro.main.util.SendMail;
+
+import nl.captcha.Captcha;
 
 @Service
 public class MainServiceImpl implements MainService {
@@ -249,10 +254,10 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public String findPass(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request) {
+	public String findPass(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request, HttpServletResponse response) {
 		
 		String dbId = mainDao.findPass(sbEmail);
-		if(!sbText.equals(dbId)){
+		if(sbText==null || !sbText.equals(dbId)){
 			model.addAttribute("message", "잘못된 접근입니다..");
 			model.addAttribute("url", "main.do");
 			return "etc/message";
@@ -260,8 +265,57 @@ public class MainServiceImpl implements MainService {
 		
 		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
 		model.addAttribute("id", dbId);
-		
+		System.out.println("?????");
+//		response.setHeader("Pragma-directive", "no-cache");
+//		response.setHeader("Cache-directive", "no-cache");
+//		response.setHeader("Pragma", "no-cache");
+//		response.setHeader("Cache-Control", "no-cache");
+//		response.setDateHeader("Expires", 0);
 		return "member/changePass";
+	}
+
+	@Override
+	public String audioCaptCha(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		Captcha captcha = (Captcha) session.getAttribute(Captcha.NAME);
+		String getAnswer = captcha.getAnswer();
+		new AudioCaptCha().getAudioCaptCha(request, response, getAnswer);
+		return "ect/void";
+	}
+
+	@Override
+	public void captchaCheck(String answer, HttpSession session, Model model) {
+		Captcha captcha = (Captcha)session.getAttribute(Captcha.NAME);
+		if(answer != null && !"".equals(answer)){
+			if(captcha.isCorrect(answer)){
+				session.removeAttribute(Captcha.NAME);
+				model.addAttribute("result","Y");
+				System.out.println("--------------");
+			}else{
+				model.addAttribute("result","N");
+			}
+		}
+	}
+
+	@Override
+	public String changPass(String id, String pass, String returnUrl, HttpServletRequest request, Model model) {
+		HashMap<String, String> hm = new HashMap<>();
+		String message = "";
+		String url = "";
+		hm.put("id", id);
+		hm.put("pass", pass);
+		int result = mainDao.changPass(hm);
+		if (result == 1 ){
+			message = "정상 처리 되었습니다.";
+			url = "loginForm.do";
+		}else{
+			message = "비밀번호 변경에 실패했습니다. 다시 시도해주세요";
+			url = "findPassForm.do";
+		}
+		model.addAttribute("message",message);
+		model.addAttribute("url",url);
+		model.addAttribute("returnUrl",returnUrl);
+		
+		return "etc/message";
 	}
 	
 	

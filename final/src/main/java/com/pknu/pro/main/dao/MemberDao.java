@@ -13,4 +13,5 @@ public interface MemberDao {
 	public int emailByName(HashMap<String, String> hm);
 	public MemberDto findId(HashMap<String, String> hm);
 	public String findPass(String email);
+	public int changPass(HashMap<String, String> hm);
 }

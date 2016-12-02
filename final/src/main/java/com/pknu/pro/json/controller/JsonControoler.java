@@ -1,5 +1,7 @@
 package com.pknu.pro.json.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,4 +49,13 @@ public class JsonControoler {
 		mainService.numberCheck(postNum,inputNum,model);
 		return "JSON";
 	}
+	
+	@RequestMapping("/captchaCheck.json")
+	public String captchaCheck(String answer, HttpSession session, Model model){
+		mainService.captchaCheck(answer, session, model);
+		
+		return "JSON";
+	}
+	
+	
 }

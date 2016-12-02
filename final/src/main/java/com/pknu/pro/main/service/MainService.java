@@ -1,6 +1,7 @@
 package com.pknu.pro.main.service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
@@ -24,5 +25,8 @@ public interface MainService {
 	public String numberCheck(String postNum, String inputNum, Model model);
 	public String findId(String name, String email, String returnUrl, Model model, HttpServletRequest request);
 	public String findPassForm(HttpSession session, HttpServletRequest request,String returnUrl,  Model model);
-	public String findPass(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request);
+	public String findPass(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request, HttpServletResponse response);
+	public String audioCaptCha(HttpSession session, HttpServletRequest request, HttpServletResponse response);
+	public void captchaCheck(String answer, HttpSession session, Model model);
+	public String changPass(String id, String pass, String returnUrl, HttpServletRequest request, Model model);
 }

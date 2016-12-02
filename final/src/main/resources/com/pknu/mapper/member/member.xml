@@ -56,4 +56,9 @@
 		WHERE email = #{email}
 	</select>
 	
+	<update id="changPass" parameterType="HashMap">
+		UPDATE member SET pass=#{pass} 
+		WHERE id = #{id} 
+	</update>
+	
 </mapper>
