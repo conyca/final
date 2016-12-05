@@ -82,14 +82,8 @@ public class MainServiceImpl implements MainService {
 	
 
 	@Override
-	public String joinForm(HttpSession session, HttpServletRequest request, Model model) {
-		String id = (String)session.getAttribute("id");
+	public String joinForm(HttpServletRequest request, Model model) {
 		String returnUrl = request.getHeader("referer");
-		if(id!=null){
-			model.addAttribute("message","잘못된 접근입니다.");
-			model.addAttribute("url", "main.do");
-			return "etc/message";
-		}
 		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
 		return "member/join";
 	}
@@ -104,31 +98,9 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public String loginForm(HttpServletRequest request, Model model, String returnUrl, HttpSession session){
-		String id = (String)session.getAttribute("id");
-		if(id != null){
-			model.addAttribute("message", "잘못된 접근입니다..");
-			model.addAttribute("url", "main.do");
-			return "etc/message";
-		}
+	public String loginForm(HttpServletRequest request, Model model, String returnUrl){
 		returnUrl = ReturnUrl.returnUrlCheck(returnUrl, request);
-//		System.out.println("returnUrl" + returnUrl);
-//		System.out.println("--->" + returnUrl.substring(returnUrl.lastIndexOf("/")+1,returnUrl.lastIndexOf(".")));
-//		if(returnUrl.substring(returnUrl.lastIndexOf("/")+1,returnUrl.lastIndexOf(".")).equals("loginForm")){
-//			returnUrl = "main.do";
-//		}
 		model.addAttribute("returnUrl", returnUrl);
-		
-//		if(returnUrl!=null && returnUrl.length()!= 0){
-//			if(returnUrl.indexOf('?')>0){
-//				returnUrl=returnUrl.substring(returnUrl.indexOf('=')+1);
-//			}
-//			System.out.println("true");
-//			model.addAttribute("returnUrl", returnUrl);
-//		}else{
-//			System.out.println("false");
-//			model.addAttribute("returnUrl", request.getHeader("referer"));
-//		}
 		model.addAttribute("mainUrl","main.do");
 		return "member/login";
 	}
@@ -142,6 +114,7 @@ public class MainServiceImpl implements MainService {
 			if(resultPass.equals(pass)){//로그인
 				url="redirect:"+returnUrl;
 				session.setAttribute("id", id);
+				session.setAttribute("category", mainDao.getMemberCategory(id));
 			}else{//비번틀림
 				url="etc/message";
 				model.addAttribute("returnUrl", returnUrl);
@@ -163,6 +136,7 @@ public class MainServiceImpl implements MainService {
 		String id = (String)session.getAttribute("id");
 		if(id != null){
 			session.removeAttribute("id");
+			session.removeAttribute("category");
 			model.addAttribute("message", "로그아웃 되었습니다.");
 			model.addAttribute("url", returnUrl);
 		}else{
@@ -173,13 +147,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 	@Override
-	public String findIdForm(HttpSession session, HttpServletRequest request, String returnUrl, Model model) {
-		String id = (String)session.getAttribute("id");
-		if(id != null){
-			model.addAttribute("message", "잘못된 접근입니다..");
-			model.addAttribute("url", "main.do");
-			return "etc/message";
-		}
+	public String findIdForm(HttpServletRequest request, String returnUrl, Model model) {
 		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
 		return "member/findId";
 	}
@@ -190,22 +158,16 @@ public class MainServiceImpl implements MainService {
 		HashMap<String, String> hm = new HashMap<>();
 		HashMap<String, String> data = new HashMap<>();
 		String result="";
-		System.out.println(type);
-		System.out.println(text);
-		System.out.println(email);
-		
 		
 		if(type.equals("id")){
 			hm.put("name", text);
 			hm.put("type", type);
 		}else{
-			System.out.println("여기요~~~ : " + text);
 			hm.put("type", type);
 			hm.put("id", text);
 		}
 		hm.put("email", email);
 		int dbResult = mainDao.emailByName(hm);
-		System.out.println(dbResult);
 		if(dbResult > 0 ){
 			String num = randomNum.randomNumber();
 			sendMail.setContent(MakeMail.makeContent(num));
@@ -217,14 +179,12 @@ public class MainServiceImpl implements MainService {
 			result = "N";
 		}
 		data.put("result", result);
-		System.out.println("result"+ result);
 		model.addAttribute("data",data);
 	}
 
 	@Override
 	public String numberCheck(String postNum, String inputNum, Model model) {
 		model.addAttribute("result",securityUtil.checkNum(postNum, inputNum));
-		System.out.println(securityUtil.checkNum(postNum, inputNum));
 		return null;
 	}
 
@@ -235,20 +195,13 @@ public class MainServiceImpl implements MainService {
 		hm.put("email", email);
 		
 		memberDto = mainDao.findId(hm);
-		System.out.println("memDto : " + memberDto);
 		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
 		model.addAttribute("member", memberDto);
 		return "member/findResult";
 	}
 
 	@Override
-	public String findPassForm(HttpSession session, HttpServletRequest request, String returnUrl, Model model) {
-		String id = (String)session.getAttribute("id");
-		if(id != null){
-			model.addAttribute("message", "잘못된 접근입니다..");
-			model.addAttribute("url", "main.do");
-			return "etc/message";
-		}
+	public String findPassForm(HttpServletRequest request, String returnUrl, Model model) {
 		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
 		return "member/findPass";
 	}
@@ -265,12 +218,6 @@ public class MainServiceImpl implements MainService {
 		
 		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
 		model.addAttribute("id", dbId);
-		System.out.println("?????");
-//		response.setHeader("Pragma-directive", "no-cache");
-//		response.setHeader("Cache-directive", "no-cache");
-//		response.setHeader("Pragma", "no-cache");
-//		response.setHeader("Cache-Control", "no-cache");
-//		response.setDateHeader("Expires", 0);
 		return "member/changePass";
 	}
 
@@ -316,6 +263,15 @@ public class MainServiceImpl implements MainService {
 		model.addAttribute("returnUrl",returnUrl);
 		
 		return "etc/message";
+	}
+
+	@Override
+	public String myPage(HttpSession session, Model model) {
+		String id = (String) session.getAttribute("id");
+		memberDto = mainDao.getMember(id);
+		model.addAttribute("member", memberDto);
+		
+		return "member/myPage";
 	}
 	
 	

@@ -1,0 +1,6 @@
+main -> session 상관없음 (비회원)
+
+1.member
+member -> session 필수 (회원전용)
+intoMember -> session id not (비회원 전용)
+

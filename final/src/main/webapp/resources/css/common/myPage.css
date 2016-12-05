@@ -1,0 +1,14 @@
+@CHARSET "UTF-8";
+
+@media screen and (max-width:736px){
+	
+}
+
+/* 모바일 외 */
+@media screen and (min-width:737px){
+
+	aside#mobile {
+		display: none;
+	}
+	
+}

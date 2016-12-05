@@ -15,18 +15,19 @@ public interface MainService {
 	public String joinIdCheck(String id);
 	public String joinEmailCheck(String email);
 	public String joinMobnoCheck(String mobno);
-	public String joinForm(HttpSession session, HttpServletRequest request, Model model);
+	public String joinForm(HttpServletRequest request, Model model);
 	public String join(MemberDto memberDto, String returnUrl, Model model);
-	public String loginForm(HttpServletRequest request, Model model, String returnUrl, HttpSession session);
+	public String loginForm(HttpServletRequest request, Model model, String returnUrl);
 	public String login(HttpSession session, String id, String pass , String returnUrl, Model model);
 	public String logout(HttpSession session, HttpServletRequest request, Model model);
-	public String findIdForm(HttpSession session, HttpServletRequest request,String returnUrl,  Model model);
+	public String findIdForm(HttpServletRequest request,String returnUrl,  Model model);
 	public void findIdMail(String type, String text, String email, Model model);
 	public String numberCheck(String postNum, String inputNum, Model model);
 	public String findId(String name, String email, String returnUrl, Model model, HttpServletRequest request);
-	public String findPassForm(HttpSession session, HttpServletRequest request,String returnUrl,  Model model);
+	public String findPassForm(HttpServletRequest request,String returnUrl,  Model model);
 	public String findPass(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request, HttpServletResponse response);
 	public String audioCaptCha(HttpSession session, HttpServletRequest request, HttpServletResponse response);
 	public void captchaCheck(String answer, HttpSession session, Model model);
 	public String changPass(String id, String pass, String returnUrl, HttpServletRequest request, Model model);
+	public String myPage(HttpSession session, Model model);
 }

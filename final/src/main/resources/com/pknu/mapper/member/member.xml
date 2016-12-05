@@ -29,7 +29,7 @@
 	
 	<select id="login" parameterType="String" resultType="String">
 		SELECT pass FROM member
-		WHERE id = #{id}
+		WHERE id = #{id} and status = 'nomal'
 	</select>
 	
 	<select id="emailByName" parameterType="HashMap" resultType="int">
@@ -43,22 +43,37 @@
 		id = #{id} 
 		</if>
 		and email = #{email}
+		and status = 'nomal'
 	</select>
 	
 	<select id="findId" parameterType="HashMap" resultType="member">
 		SELECT id, to_char(regDate,'YYYY-MM-DD') FROM member 
 		WHERE name = #{name} and email = #{email}
+		and status = 'nomal'
 	</select>
 	
 	<select id="findPass" parameterType="String" resultType="String">
 		SELECT id 
 		FROM member 
 		WHERE email = #{email}
+		and status = 'nomal'
 	</select>
 	
 	<update id="changPass" parameterType="HashMap">
 		UPDATE member SET pass=#{pass} 
-		WHERE id = #{id} 
+		WHERE id = #{id} and status = 'nomal'
 	</update>
+	
+	<select id="getMember" parameterType="String" resultType="member">
+		SELECT * FROM member 
+		WHERE id = #{id} and status = 'nomal'
+	</select>
+	
+	<select id="getMemberCategory" parameterType="String" resultType="int">
+		SELECT category FROM member 
+		WHERE id = #{id} and status = 'nomal'
+	</select>
+	
+	
 	
 </mapper>

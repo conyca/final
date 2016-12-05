@@ -26,55 +26,10 @@ public class MainController {
 	
 	@RequestMapping("/main.do")
 	public String main(){
-		
 		return "main/main";
 	}
 	
 	
-	@RequestMapping("/joinForm.do")
-	public String joinForm(HttpSession session, HttpServletRequest request, Model model){
-		return mainService.joinForm(session, request, model);
-	}
-	
-	@RequestMapping("/join.do")
-	public String join(MemberDto memberDto, String returnUrl, Model model){
-		return mainService.join(memberDto, returnUrl, model);
-	}
-	
-	@RequestMapping("/loginForm.do")
-	public String loginForm(HttpServletRequest request, Model model, String returnUrl, HttpSession session){
-		return mainService.loginForm(request,model,returnUrl,session);
-	}
-	
-	@RequestMapping("/login.do")
-	public String login(HttpSession session, String id, String pass , String returnUrl, Model model){
-		return mainService.login(session,id,pass,returnUrl,model);
-	}
-	
-	@RequestMapping("/logout.do")
-	public String logout(HttpSession session, HttpServletRequest request, Model model){
-		return mainService.logout(session, request, model);
-	}
-	
-	@RequestMapping("/findIdForm.do")
-	public String findIdForm(HttpSession session, HttpServletRequest request,String returnUrl,  Model model){
-		return mainService.findIdForm(session, request,returnUrl, model);
-	}
-	
-	@RequestMapping("/findId.do")
-	public String findId(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request){
-		return mainService.findId(sbText,sbEmail,returnUrl,model,request);
-	}
-	
-	@RequestMapping("/findPassForm.do")
-	public String findPassForm(HttpSession session, HttpServletRequest request,String returnUrl,  Model model){
-		return mainService.findPassForm(session, request,returnUrl, model);
-	}
-	
-	@RequestMapping("/findPass.do")
-	public String findPass(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request, HttpServletResponse response){
-		return mainService.findPass(sbText,sbEmail,returnUrl,model,request, response);
-	}
 	
 	// captcha ¿ÃπÃ¡ˆ
 //	@RequestMapping("/captcha.do")
@@ -87,24 +42,6 @@ public class MainController {
 //	public String audioCaptCha(HttpSession session, HttpServletRequest request, HttpServletResponse response){
 //		return mainService.audioCaptCha(session,request,response);
 //	}
-	
-	@RequestMapping("/captcha.do")
-	public FileSystemResource captcha(HttpServletRequest request, HttpServletResponse response){
-		new CaptCha().getCaptCha(request, response);
-		return null;
-	}
-	
-	@RequestMapping("/audioCaptCha.do")
-	public FileSystemResource audioCaptCha(HttpSession session, HttpServletRequest request, HttpServletResponse response){
-		mainService.audioCaptCha(session,request,response);
-		return null;
-	}
-	
-	@RequestMapping("/changPass.do")
-	public String changPass(String id, String pass, String returnUrl, HttpServletRequest request, Model model){
-		return mainService.changPass(id, pass, returnUrl, request,model);
-	}
-	
 	
 	
 //	//captcha text

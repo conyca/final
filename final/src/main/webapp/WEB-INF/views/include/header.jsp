@@ -4,11 +4,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <header>
+	<div id = "myPageBtn" class="hiddenBtn"></div>
+	
 	<div id = "logo" >
 		<a href ="main.do">
 			<img src="./resources/img/main/header/logo.png">
 		</a>
 	</div>
+	
+	<div id ="GnbBtn" class="hiddenBtn"></div>
+	
 	<div id = "tnb" >
 		<ul>
 			<c:choose>
