@@ -10,8 +10,8 @@ CREATE TABLE member (
   mobno VARCHAR2(15) NOT NULL UNIQUE,
   status VARCHAR2(5) NOT NULL,
   category NUMBER NOT NULL,
-  regdate VARCHAR2(10) NOT NULL,
-  adjdate VARCHAR2(10),
+  regdate  date NOT NULL,
+  adjdate date,
   datano NUMBER
   -- datano foreign key 
 );
