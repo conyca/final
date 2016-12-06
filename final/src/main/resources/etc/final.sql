@@ -10,7 +10,11 @@ CREATE TABLE member (
   mobno VARCHAR2(15) NOT NULL UNIQUE,
   status VARCHAR2(5) NOT NULL,
   category NUMBER NOT NULL,
+<<<<<<< HEAD
   regdate date NOT NULL,
+=======
+  regdate  date NOT NULL,
+>>>>>>> branch 'master' of https://github.com/conyca/final.git
   adjdate date,
   datano NUMBER
   -- datano foreign key 
