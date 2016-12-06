@@ -20,8 +20,44 @@
 	<article>
 	
 		<div class="articleWrap">
-			<aside></aside>
-			<section></section>
+			<%@include file="../include/myInfoAside.jsp" %>
+			<aside class= "">
+				회원정보
+				<table>
+					<tr>
+						<td>아이디</td>
+						<td>아이디</td>
+					</tr>
+					<tr>
+						<td>이름</td>
+						<td>이름</td>
+					</tr>
+					<tr>
+						<td>성별</td>
+						<td>성별</td>
+					</tr>
+					<tr>
+						<td>생일</td>
+						<td>생일</td>
+					</tr>
+					<tr>
+						<td>이메일</td>
+						<td>이메일</td>
+					</tr>
+					<tr>
+						<td>휴대전화번호</td>
+						<td>휴대전화번호</td>
+					</tr>
+				</table>
+				
+				<c:if test="${sessionScope.category eq 5 }">
+					학생정보
+					class : class
+					grade : grade
+					address : address
+					
+				</c:if>
+			</aside>
 		</div>
 		
 	</article>

@@ -2,7 +2,35 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<script src="./resources/js/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	winsdowSize();
+	$("#mobile").hide();
+	$("#myPageClose").on("click",function(){
+		$("#mobile").hide("slide");
+	});
+});  
+function winsdowSize(){
+	var index = 0;
+	$("#mobile div ul li").each(function(){
+		index += 1;
+	});
+	$("#mobile div ul li").css("height", (document.body.clientHeight)/index )
+	if(document.body.clientWidth <= 736){
+		$("#myPageBtn").on("click",function(){
+			$("#mobile").show("slide", { direction: "left"  }, 500);
+		}); 
+	}else{
+		$("#mobile").hide();
+	}
+// 	$("#logo").css()
+	
+}
+window.onresize = winsdowSize;
 
+</script>
+	
 <header>
 	<div id = "myPageBtn" class="hiddenBtn"></div>
 	
@@ -12,14 +40,12 @@
 		</a>
 	</div>
 	
-	<div id ="GnbBtn" class="hiddenBtn"></div>
-	
 	<div id = "tnb" >
 		<ul>
 			<c:choose>
 				<c:when test="${!empty sessionScope.id }">
 					<li><a>아이디</a></li>
-					<li><a>마이페이지</a></li>
+					<li><a href="myPage.do">마이페이지</a></li>
 					<li><a>고객센터</a></li>
 					<li><a href="logout.do">로그아웃</a></li>
 				</c:when>
@@ -48,4 +74,7 @@
 			<li><a>커뮤니티</a></li>
 		</ul>
 	</div>
+	
+	<%@include file = "myPageSaid.jsp" %>
+	
 </header>

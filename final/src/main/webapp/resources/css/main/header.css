@@ -8,16 +8,21 @@
 		float: left;
 	}
 	#tnb {
-		margin-top:35px;
-		float: right;
-		font-size: 10px;
+		display:  none;
 	}
-	#tnb ul li {
-		float: left;
-	}
-	#tnb ul li a {
-		margin : 0 5px 0 5px;
-	}
+	
+/* 	#tnb { */
+/* 		margin-top:35px; */
+/* 		float: right; */
+/* 		font-size: 10px; */
+/* 	} */
+/* 	#tnb ul li { */
+/* 		float: left; */
+		
+/* 	} */
+/* 	#tnb ul li a { */
+/* 		margin : 0 5px 0 5px; */
+/* 	} */
 	
 	
 	#gnb {
@@ -53,6 +58,25 @@
 		background-image: url("../../img/main/header/community.png");
 		background-size: 100% 100%;
 	}
+	
+	.hiddenBtn {
+		width:25px;
+		height: 25px;			
+		float:left;
+		display : block;
+		margin: 40px 10px 0 10px;
+	}
+	
+	#myPageBtn {
+		background: url(../../img/common/btn/hiddenBtn.png);
+		background-size: 100% 100%;
+	}
+	#GnbBtn {
+		float:right;
+		background: url(../../img/common/btn/rightBtn.png);
+		background-size: 100% 100%;
+	}
+	
 	
 	
 }
@@ -97,7 +121,6 @@
 		font-weight: bolder;
 		
 	}
-	
 	
 	
 }

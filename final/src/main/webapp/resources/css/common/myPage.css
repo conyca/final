@@ -1,13 +1,67 @@
 @CHARSET "UTF-8";
 
 @media screen and (max-width:736px){
+	/* 버튼클릭시 보임 */
+	aside#mobileAside {
+		display: none;
+		width : 100%;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		z-index: 9999;
+	}
+	#mobileAside div ul {
+		list-style: none;
+	}
 	
+	#mobileAside div ul li {
+		display: block;
+		background: yellow;
+		
+	}
+	#myPageClose {
+		float : right;
+		background: url(../../img/common/btn/close.png);
+		background-position: 100% 100%;
+		width:25px;
+		height: 25px;
+	}
+	
+	.gnbList div {
+		float : left;
+		box-sizing:border-box;
+		width : 25%;
+		height: 50%;
+		overflow :hidden;
+		border: 1px solid #999; 
+	}
+	
+	.memberItem div {
+		float : left;
+		width : 50%;
+		height : 50%;
+		overflow :hidden;
+		box-sizing:border-box;
+		border: 1px solid #999; 
+	}
+	#lastLi {
+		padding-top : 5%;
+	}
+	#lastLi div {
+		
+		float:left;
+		box-sizing : border-box;
+		border : 1px solid #999;
+		width: 33.3%;
+		height: 50%;
+		overflow: hidden;
+	}
 }
 
 /* 모바일 외 */
 @media screen and (min-width:737px){
 
-	aside#mobile {
+	aside#mobileAside {
 		display: none;
 	}
 	
