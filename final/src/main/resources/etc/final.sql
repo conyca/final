@@ -10,11 +10,8 @@ CREATE TABLE member (
   mobno VARCHAR2(15) NOT NULL UNIQUE,
   status VARCHAR2(5) NOT NULL,
   category NUMBER NOT NULL,
-<<<<<<< HEAD
   regdate date NOT NULL,
-=======
   regdate  date NOT NULL,
->>>>>>> branch 'master' of https://github.com/conyca/final.git
   adjdate date,
   datano NUMBER
   -- datano foreign key 
@@ -23,3 +20,15 @@ CREATE TABLE member (
 CREATE SEQUENCE mem_seq
   START WITH 1
   INCREMENT BY 1;
+
+DROP TABLE data;
+CREATE TABLE data(
+  dataNum NUMBER PRIMARY KEY,
+  name VARCHAR2(15) NOT NULL,
+  category NUMBER NOT NULL,
+  address VARCHAR2(200) NOT NULL,
+  class VARCHAR2(20) NOT NULL,
+  grade VARCHAR2(20),
+  mobno VARCHAR2(15),
+  school VARCHAR2(50)
+);

@@ -116,8 +116,8 @@
 					
 					아이디 : <c:out value="${id }"></c:out>
 					<div>
-						<input type ="password" placeholder="새 비밀번호" id="pass" name = "pass">
-						<input type ="password" placeholder="새 비밀번호 확인" id="passCheck">
+						<input type ="password" class="int" placeholder="새 비밀번호" id="pass" name = "pass">
+						<input type ="password" class="int"  placeholder="새 비밀번호 확인" id="passCheck">
 					</div>
 					
 					
@@ -127,12 +127,12 @@
 			<div>
 				<div id="captcha">Wait...</div>
 				<div id="audiocaptcha" style="display: none;"></div>
-				<input type = "button" id = "reLoad" value="새로고침">
-				<input type = "button" id = "soundOnKor" value="음성 듣기"><br>
+				<input type = "button" class="btn_global" id = "reLoad" value="새로고침">
+				<input type = "button" class="btn_global" id = "soundOnKor" value="음성 듣기"><br>
 				모바일에선 음성이 지원하지 않을 수 있습니다.
 				<br>
-				<input type="text" id="answer" name ="answer" value="">
-				<input type="button" id="frmSubmit" value="확인">
+				<input type="text" class="int"  id="answer" name ="answer" value="">
+				<input type="button" class="btn_global" id="frmSubmit" value="확인">
 			</div>
 		
 		</div>

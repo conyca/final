@@ -6,23 +6,24 @@
 <script type="text/javascript">
 $(function(){
 	winsdowSize();
-	$("#mobile").hide();
+	$("#mobileAside").hide();
 	$("#myPageClose").on("click",function(){
-		$("#mobile").hide("slide");
+		$("#mobileAside").hide("slide");
 	});
 });  
 function winsdowSize(){
 	var index = 0;
-	$("#mobile div ul li").each(function(){
+	$("#mobileAside div ul li").each(function(){
 		index += 1;
 	});
-	$("#mobile div ul li").css("height", (document.body.clientHeight)/index )
+	$("#mobileAside div ul li").css("height", (document.body.clientHeight)/index );
+	
 	if(document.body.clientWidth <= 736){
 		$("#myPageBtn").on("click",function(){
-			$("#mobile").show("slide", { direction: "left"  }, 500);
-		}); 
+			$("#mobileAside").show("slide", { direction: "left"  }, 500 );
+		});  
 	}else{
-		$("#mobile").hide();
+		$("#mobileAside").hide();
 	}
 // 	$("#logo").css()
 	
