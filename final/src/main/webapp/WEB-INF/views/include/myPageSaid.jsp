@@ -8,7 +8,7 @@
 	<div>
 		<ul>
 			<li>
-				<div>
+				<div id = "mobileAsideId">
 					<c:if test="${!empty sessionScope.id }">
 						${sessionScope.id }
 					</c:if>
