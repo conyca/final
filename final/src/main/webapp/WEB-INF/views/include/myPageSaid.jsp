@@ -10,7 +10,7 @@
 			<li>
 				<div id = "mobileAsideId">
 					<c:if test="${!empty sessionScope.id }">
-						${sessionScope.id }
+						${sessionScope.name }
 					</c:if>
 					<c:if test="${empty sessionScope.id}">
 						<c:if test="${fn:length(param.returnUrl)>0 }">
@@ -68,7 +68,7 @@
 					
 					</div>
 					<c:if test="${sessionScope.category eq 0 }">
-						<div>
+						<div id = "mobileAsideId">
 							<a href = "">정회원 신청하기</a>
 						</div>
 					</c:if>

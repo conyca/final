@@ -114,7 +114,9 @@ public class MainServiceImpl implements MainService {
 			if(resultPass.equals(pass)){//로그인
 				url="redirect:"+returnUrl;
 				session.setAttribute("id", id);
-				session.setAttribute("category", mainDao.getMemberCategory(id));
+				memberDto=mainDao.getMember(id);
+				session.setAttribute("category", memberDto.getCategory());
+				session.setAttribute("name", memberDto.getName());
 			}else{//비번틀림
 				url="etc/message";
 				model.addAttribute("returnUrl", returnUrl);

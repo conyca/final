@@ -18,8 +18,30 @@
 	<%@ include file="../include/header.jsp" %>
 	
 	<article>
-		
-		
+		<div>
+			<div>게시판이름</div>
+			<div>
+				<!-- 한 row -->
+				<div>
+					<span>번호</span>
+					<span>제목</span>
+					<span>글쓴이</span>
+					<span>등록일</span>
+					<span>조회수</span>
+				</div>
+				<c:forEach items="${list }" var="item">
+					<div>
+						<span>번호</span>
+						<span>제목</span>
+						<span>글쓴이</span>
+						<span>등록일</span>
+						<span>조회수</span>
+					</div>
+				</c:forEach>
+				
+			</div>
+			<div></div>		
+		</div>
 	</article>
 	
 	<%@ include file="../include/footer.jsp"  %>
