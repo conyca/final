@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.pknu.pro.main.service.MainService;
 
 @Controller
-public class JsonControoler {
+public class JsonController {
 
 
 	@Autowired

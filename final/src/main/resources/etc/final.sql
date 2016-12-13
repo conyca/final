@@ -12,9 +12,9 @@ CREATE TABLE member (
   category NUMBER NOT NULL,
   regdate date NOT NULL,
   adjdate date,
-  datano NUMBER,
+  dataNum NUMBER,
   -- datano foreign key 
-  CONSTRAINT mem_fk foreign key(datano)
+  CONSTRAINT mem_fk foreign key(dataNum)
   REFERENCES data(dataNum)
 );
 
@@ -28,13 +28,15 @@ CREATE TABLE data(
   name VARCHAR2(15) NOT NULL,
   category NUMBER NOT NULL,
   address VARCHAR2(200) NOT NULL,
-  class VARCHAR2(20),
+  classNum number,
   grade VARCHAR2(20),
   mobno VARCHAR2(15),
   school VARCHAR2(50),
-  children number,
-  CONSTRAINT data_fk foreign key(children)
-  REFERENCES data(dataNum)
+  parents number,
+  CONSTRAINT data_fk foreign key(parents)
+  REFERENCES data(dataNum),
+  CONSTRAINT data_fk2 foreign key(classNum)
+  REFERENCES class(classNum)
 );
 
 CREATE SEQUENCE data_seq
@@ -75,7 +77,7 @@ create table timetable(
   startTime varchar2(50) not null,
   endTime varchar2(50) not null,
   dow varchar2(50) not null,
-  class number not null,
+  classNo number not null,
   adjDate date not null,
   CONSTRAINT timetable_fk1 foreign key(subject)
   REFERENCES subject(subjectNum),
@@ -126,7 +128,38 @@ create sequence adv_seq
 
 
 create table board(
-
-
-
+  boardNum number primary key,
+  kind number not null,
+  writer number not null,
+  category number not null,
+  boardNo number  not null,
+  title varchar2(2000) not null,
+  content clob,
+  depth number not null,
+  hit number not null,
+  groupId number not null,
+  writeDate date not null,
+  fileStatus number not null,
+  CONSTRAINT board_fk foreign key(writer)
+  REFERENCES member(memberno)
 );
+create sequence board_seq
+  start with 1
+  increment by 1;
+  
+  
+  --문의 게시판
+create table inquiry(
+  inquNum number primary key,
+  content varchar2(3000) not null,
+  memberNo number not null,
+  regDate date not null,
+  answer varchar2(3000),
+  anAnswer number,
+  answerDate date,
+  status number,
+  CONSTRAINT inqu_fk1 foreign key(memberNo)
+  REFERENCES member(memberno),
+  CONSTRAINT inqu_fk1 foreign key(anAnswer)
+  REFERENCES member(memberno)
+)

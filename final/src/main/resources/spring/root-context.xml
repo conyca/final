@@ -39,8 +39,12 @@
 		<constructor-arg value="d:\upload\" />		
 	</bean> 	
 	
-	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="bbsDao">
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="memberDao">
 	  <property name="mapperInterface" value="com.pknu.pro.main.dao.MemberDao" />		
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="dataDao">
+	  <property name="mapperInterface" value="com.pknu.pro.main.dao.DataDao" />		
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	

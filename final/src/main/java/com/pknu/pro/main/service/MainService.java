@@ -30,4 +30,5 @@ public interface MainService {
 	public void captchaCheck(String answer, HttpSession session, Model model);
 	public String changPass(String id, String pass, String returnUrl, HttpServletRequest request, Model model);
 	public String myPage(HttpSession session, Model model);
+	public String infoChangeForm(HttpSession session, Model model);
 }

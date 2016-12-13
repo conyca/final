@@ -6,11 +6,18 @@
 <aside id="pcAside">
 	<div>
 		<ul>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
-			<li></li>
+			<li>
+				<a href ="myPage.do">회원 정보</a>
+			</li>
+			<li>
+				<a href="infoChangeForm.do">회원 정보 변경</a>
+			</li>
+			<li>
+				<a href="inquiry.do">문의 내역 및 답변</a>
+			</li>
+			<li>
+				<a href ="withdrawalForm.do">탈퇴</a>
+			</li>
 		</ul>
 	</div>
 </aside>

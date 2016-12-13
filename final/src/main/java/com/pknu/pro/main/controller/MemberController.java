@@ -28,5 +28,10 @@ public class MemberController {
 		return mainService.myPage(session, model);
 	}
 	
+	@RequestMapping("/infoChangeForm.do")
+	public String infoChangeForm(HttpSession session, HttpServletRequest request, Model model){
+		
+		return mainService.infoChangeForm(session,model);
+	}
 	
 }

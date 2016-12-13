@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.pknu.pro.main.captcha.AudioCaptCha;
+import com.pknu.pro.main.dao.ClassDao;
+import com.pknu.pro.main.dao.DataDao;
 import com.pknu.pro.main.dao.MemberDao;
+import com.pknu.pro.main.dto.DataDto;
 import com.pknu.pro.main.dto.MemberDto;
 import com.pknu.pro.main.util.MakeMail;
 import com.pknu.pro.main.util.MemberCategory;
@@ -31,6 +34,9 @@ public class MainServiceImpl implements MainService {
 	MemberDao mainDao;
 	
 	@Autowired
+	DataDao dataDao;
+	
+	@Autowired
 	RandomNumber randomNum;
 	
 	@Autowired
@@ -40,6 +46,7 @@ public class MainServiceImpl implements MainService {
 	SecurityUtil securityUtil;
 	
 	MemberDto memberDto;
+	DataDto dataDto;
 	
 	@Override
 	public String joinIdCheck(String id) {
@@ -272,8 +279,22 @@ public class MainServiceImpl implements MainService {
 		String id = (String) session.getAttribute("id");
 		memberDto = mainDao.getMember(id);
 		model.addAttribute("member", memberDto);
+		if(memberDto.getCategory()>=5){
+			dataDto = dataDao.getMemberData(memberDto.getDataNum());
+			model.addAttribute("data", dataDto);
+			
+		}
 		
 		return "member/myPage";
+	}
+
+	@Override
+	public String infoChangeForm(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		memberDto = mainDao.getMember(id);
+		model.addAttribute("member", memberDto);
+		
+		return "member/inforChange";
 	}
 	
 	

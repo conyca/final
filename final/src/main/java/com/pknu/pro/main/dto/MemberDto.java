@@ -17,7 +17,7 @@ public class MemberDto {
 	private int category;
 	private String regDate;
 	private String adjDate;
-	private int dataNo;
+	private int dataNum;
 	
 	
 	public String getEmail() {
@@ -92,17 +92,17 @@ public class MemberDto {
 	public void setAdjDate(String adjDate) {
 		this.adjDate = adjDate;
 	}
-	public int getDataNo() {
-		return dataNo;
+	public int getDataNum() {
+		return dataNum;
 	}
-	public void setDataNo(int dataNo) {
-		this.dataNo = dataNo;
+	public void setDataNum(int dataNum) {
+		this.dataNum = dataNum;
 	}
 	@Override
 	public String toString() {
 		return "MemberDto [memberNo=" + memberNo + ", id=" + id + ", pass=" + pass + ", name=" + name + ", sex=" + sex
 				+ ", birthday=" + birthday + ", email=" + email + ", mobno=" + mobno + ", status=" + status
-				+ ", category=" + category + ", regDate=" + regDate + ", adjDate=" + adjDate + ", dataNo=" + dataNo
+				+ ", category=" + category + ", regDate=" + regDate + ", adjDate=" + adjDate + ", dataNum=" + dataNum
 				+ "]";
 	}
 	
