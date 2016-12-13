@@ -160,6 +160,30 @@ create table inquiry(
   status number,
   CONSTRAINT inqu_fk1 foreign key(memberNo)
   REFERENCES member(memberno),
-  CONSTRAINT inqu_fk1 foreign key(anAnswer)
+  CONSTRAINT inqu_fk2 foreign key(anAnswer)
   REFERENCES member(memberno)
-)
+);
+
+create sequence inqu_seq
+  start with 1
+  increment by 1;
+  
+create table comments(
+  commnetNum number primary key,
+  memberNo number not null,
+  content clob not null,
+  commentDate date not null,
+  boardNum number not null,
+  CONSTRAINT comment_fk foreign key(boardNum)
+  REFERENCES board(boardNum)
+);
+
+create sequence comm_seq
+  start with 1
+  increment by 1;
+
+create table filelist(
+  storedFname varchar2(1000) primary key,
+  filelength number not null,
+  boardNum number not null
+);
