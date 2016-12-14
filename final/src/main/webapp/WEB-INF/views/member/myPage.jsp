@@ -19,6 +19,7 @@
 	
 	<article>
 		<div class="articleWrap">
+			${sessionScope.category }
 			<%@include file="../include/myInfoAside.jsp" %>
 			<c:set var="year">${fn:substring(member.birthday,0,4)  }</c:set>
 			<c:set var="month">${fn:substring(member.birthday,4,6)  }</c:set>

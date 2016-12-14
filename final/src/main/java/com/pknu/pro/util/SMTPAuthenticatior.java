@@ -1,8 +1,11 @@
-package com.pknu.pro.main.util;
+package com.pknu.pro.util;
 
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SMTPAuthenticatior extends Authenticator {
 
 	@Override

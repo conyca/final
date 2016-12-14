@@ -74,6 +74,39 @@
 		WHERE id = #{id} and status like 'nomal'
 	</select>
 	
+	<select id="getInquCount" parameterType="int" resultType="int">
+		SELECT COUNT(inquNum) FROM inquiry 
+		WHERE memberNo = #{memberNo}
+	</select>
 	
+	<select id="getinquList" parameterType="hashMap" resultType="inqu">
+		SELECT inquNum, content, id, regDate, answer, answerId, answerDate, status 
+		FROM (
+				SELECT ROWNUM rm, inpu.* 
+				FROM (SELECT i.inquNum inquNum, i.content content, m.id id, i.regDate regDate,
+							 i.answer answer, a.id answerId, i.answerDate, i.status status 
+					  From inQuiry i, member m, member a 
+					  WHERE i.memberNo=m.memberNo 
+					  AND nvl(i.anAnswer,1) = a.memberNo 
+					  ORDER BY i.inquNum desc 
+							  ) inpu
+				)
+		WHERE rm BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
+	<update id="withdrawal" parameterType="hashMap">
+		UPDATE member SET status = #{status} 
+		WHERE memberNo = #{memberNo}
+	</update>
+	
+	<update id="ask" parameterType="hashMap">
+		UPDATE member set category = #{category} 
+		WHERE id = #{id}
+	</update>
+	
+	<update id="cencel" parameterType="String">
+		UPDATE member set category = 0 
+		WHERE id = #{id}
+	</update>
 	
 </mapper>

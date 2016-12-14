@@ -1,4 +1,4 @@
-package com.pknu.pro.board.util;
+package com.pknu.pro.util;
 
 import org.springframework.stereotype.Component;
 
@@ -21,9 +21,9 @@ public class Page {
 
 		sb = new StringBuffer();
 		if(startPage < pageBlock) {
-			sb.append("<img src='images/hot.gif' width='30' height='9'>");			
+			sb.append("<img src='./resources/img/board/btn/board_left.png' width='30' height='9'>");			
 		} else {
-			sb.append("<img src='images/hot.gif' width='30' height='9'");
+			sb.append("<img src='./resources/img/board/btn/board_left.png' width='30' height='9'");
 			sb.append(" onclick='location.href=\""+url+"?pageNum=");
 			sb.append(startPage - pageBlock);
 			sb.append("\"' style='cursor:pointer'> ");
@@ -46,12 +46,12 @@ public class Page {
 		
 		sb.append("&nbsp;&nbsp;|");		
 		if(endPage < totalPage) {
-			sb.append("<img src='images/hot.gif' width='30' height='9'");
+			sb.append("<img src='./resources/img/board/btn/board_right.png' width='30' height='9'");
 			sb.append(" onclick='location.href=\""+url+"?pageNum=");
 			sb.append(startPage + pageBlock);
 			sb.append("\"' style='cursor:pointer'> ");						
 		} else {
-			sb.append("<img src='images/hot.gif' width='30' height='9'>");
+			sb.append("<img src='./resources/img/board/btn/board_right.png' width='30' height='9'>");
 			
 		}		
 	}

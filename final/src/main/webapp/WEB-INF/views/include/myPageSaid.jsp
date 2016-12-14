@@ -40,7 +40,7 @@
 							</c:when>
 						</c:choose>
 						
-						<div><a href = "">대기 취소</a></div>
+						<div><a href = "cencel.do">대기 취소</a></div>
 					</c:if>
 					
 					

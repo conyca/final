@@ -12,6 +12,21 @@
 <title>행복하니? 행복학원!</title>
 <link rel="stylesheet" href="./resources/css/member/myPage/myPageStyle.css">
 <script src="./resources/js/jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	function onSubmit(){
+		var select = document.getElementById("select");
+		if(select.value==""){
+			alert("신청 분류를 선택해주세요");
+			select.focus();
+			return false;
+		}
+		var c = $("option:selected").text();
+		if(confirm(c+"(으)로 정회원을 신청하시겠습니까?")==true){
+			return true;
+		}
+		return false;
+	}
+</script>
 </head>
 <body>
 	
@@ -21,43 +36,18 @@
 		<div class="articleWrap">
 			<%@include file="../include/myInfoAside.jsp" %>
 			<aside class= "">
-				문의 내역 및 답변
-				
-				<table>
-					<tr>
-						<td>번호</td>
-						<td>답변</td>
-						<td>내용</td>
-						<td>문의날짜</td>
-					</tr>
-					<c:if test="${!empty inquList }">
-						<c:forEach items="${inquList }" var="list">
-							<tr>
-								<td>${list.inquNum }</td>
-								<td>
-									<c:if test="${list.status eq 0 }">
-										대기중
-									</c:if>
-									<c:if test="${list.status eq 1 }">
-										답변완료
-									</c:if>
-								</td>
-								<td>
-									${list.content }
-								</td>
-								<td>${fn:substring(list.regDate,0,10 )}</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-					<c:if test="${empty inquList }">
-						<tr>
-							<td colspan="3">문의 내역이 없습니다.</td>
-						</tr>
-					</c:if>
-					<tr>
-						<td>${pageCode }</td>
-					</tr>
-				</table>
+				정회원 신청
+				<form action="ask.do" method="post" onsubmit="return onSubmit();" name = "fr">
+					신청 분류
+					<select name="category" id="select">
+						<option value="">선택</option>
+						<option value="1">학생</option>
+						<option value="2">학부모</option>
+						<option value="3">선생님</option>
+						<option value="4">직원</option>
+					</select>
+					<input type="submit" value="신청">
+				</form>
 			</aside>
 		</div>
 		

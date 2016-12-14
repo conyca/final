@@ -20,6 +20,7 @@
 	<typeAliases>
 	    <typeAlias alias="member" type="com.pknu.pro.main.dto.MemberDto" />
 		<typeAlias alias="data" type="com.pknu.pro.main.dto.DataDto"/>
+		<typeAlias alias="inqu" type="com.pknu.pro.main.dto.InquiryDto"/>
 	</typeAliases>
 	
 <!-- 	<mappers> -->

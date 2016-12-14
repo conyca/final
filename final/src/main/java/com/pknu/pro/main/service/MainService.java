@@ -31,4 +31,11 @@ public interface MainService {
 	public String changPass(String id, String pass, String returnUrl, HttpServletRequest request, Model model);
 	public String myPage(HttpSession session, Model model);
 	public String infoChangeForm(HttpSession session, Model model);
+	public String inquiry(HttpSession session, Model model, String pageNum);
+	public String withdrawalForm(HttpSession session, Model model);
+	public String withdrawal(HttpSession session, Model model, String pass);
+	public String askForm(HttpSession session, Model model);
+	public String ask(HttpSession session, Model model, String category);
+	public String cancel(HttpSession session, Model model);
+	
 }

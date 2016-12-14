@@ -12,6 +12,20 @@
 <title>행복하니? 행복학원!</title>
 <link rel="stylesheet" href="./resources/css/member/myPage/myPageStyle.css">
 <script src="./resources/js/jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	function onSubmit(){
+		var pass = document.getElementById("pass");
+		if(pass.value==""){
+			alert("비밀번호를 입력하세요");
+			pass.focus();
+			return false;
+		}
+		if(confirm("정말 탈퇴하시겠습니까?")==true){
+			document.fr.submit();
+		}
+		
+	}
+</script>
 </head>
 <body>
 	
@@ -21,43 +35,13 @@
 		<div class="articleWrap">
 			<%@include file="../include/myInfoAside.jsp" %>
 			<aside class= "">
-				문의 내역 및 답변
+				탈퇴<br>
 				
-				<table>
-					<tr>
-						<td>번호</td>
-						<td>답변</td>
-						<td>내용</td>
-						<td>문의날짜</td>
-					</tr>
-					<c:if test="${!empty inquList }">
-						<c:forEach items="${inquList }" var="list">
-							<tr>
-								<td>${list.inquNum }</td>
-								<td>
-									<c:if test="${list.status eq 0 }">
-										대기중
-									</c:if>
-									<c:if test="${list.status eq 1 }">
-										답변완료
-									</c:if>
-								</td>
-								<td>
-									${list.content }
-								</td>
-								<td>${fn:substring(list.regDate,0,10 )}</td>
-							</tr>
-						</c:forEach>
-					</c:if>
-					<c:if test="${empty inquList }">
-						<tr>
-							<td colspan="3">문의 내역이 없습니다.</td>
-						</tr>
-					</c:if>
-					<tr>
-						<td>${pageCode }</td>
-					</tr>
-				</table>
+				탈퇴 처리를 위해 비밀번호를 입력해주세요
+				<form action="withdrawal.do" method="post" name = "fr" onsubmit="return onSubmit();">
+					<input type="password" id="pass" name = "pass">
+					<input type="button" onclick="onSubmit();" value="탈퇴하기">
+				</form>
 			</aside>
 		</div>
 		

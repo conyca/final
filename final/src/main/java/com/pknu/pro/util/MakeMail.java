@@ -1,4 +1,4 @@
-package com.pknu.pro.main.util;
+package com.pknu.pro.util;
 
 import org.springframework.stereotype.Component;
 

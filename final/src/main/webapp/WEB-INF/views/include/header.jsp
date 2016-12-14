@@ -45,7 +45,7 @@ window.onresize = winsdowSize;
 		<ul>
 			<c:choose>
 				<c:when test="${!empty sessionScope.id }">
-					<li><a>아이디</a></li>
+					<li><a>${sessionScope.name }</a></li>
 					<li><a href="myPage.do">마이페이지</a></li>
 					<li><a>고객센터</a></li>
 					<li><a href="logout.do">로그아웃</a></li>

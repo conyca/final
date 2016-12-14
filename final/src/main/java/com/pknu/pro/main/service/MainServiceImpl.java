@@ -1,6 +1,7 @@
 package com.pknu.pro.main.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,14 +17,16 @@ import com.pknu.pro.main.dao.ClassDao;
 import com.pknu.pro.main.dao.DataDao;
 import com.pknu.pro.main.dao.MemberDao;
 import com.pknu.pro.main.dto.DataDto;
+import com.pknu.pro.main.dto.InquiryDto;
 import com.pknu.pro.main.dto.MemberDto;
-import com.pknu.pro.main.util.MakeMail;
-import com.pknu.pro.main.util.MemberCategory;
-import com.pknu.pro.main.util.MemberStatus;
-import com.pknu.pro.main.util.RandomNumber;
-import com.pknu.pro.main.util.ReturnUrl;
-import com.pknu.pro.main.util.SecurityUtil;
-import com.pknu.pro.main.util.SendMail;
+import com.pknu.pro.util.MakeMail;
+import com.pknu.pro.util.MemberCategory;
+import com.pknu.pro.util.MemberStatus;
+import com.pknu.pro.util.Page;
+import com.pknu.pro.util.RandomNumber;
+import com.pknu.pro.util.ReturnUrl;
+import com.pknu.pro.util.SecurityUtil;
+import com.pknu.pro.util.SendMail;
 
 import nl.captcha.Captcha;
 
@@ -31,7 +34,7 @@ import nl.captcha.Captcha;
 public class MainServiceImpl implements MainService {
 
 	@Autowired
-	MemberDao mainDao;
+	MemberDao memberDao;
 	
 	@Autowired
 	DataDao dataDao;
@@ -45,13 +48,16 @@ public class MainServiceImpl implements MainService {
 	@Autowired
 	SecurityUtil securityUtil;
 	
+	@Autowired
+	Page page;
+	
 	MemberDto memberDto;
 	DataDto dataDto;
 	
 	@Override
 	public String joinIdCheck(String id) {
 		String result ="";
-		int intResult = mainDao.joinIdCheck(id);
+		int intResult = memberDao.joinIdCheck(id);
 		if(intResult>0){
 			result = "N";
 		}else{
@@ -63,7 +69,7 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public String joinEmailCheck(String email){
 		String result ="";
-		int intResult = mainDao.joinEmailCheck(email);
+		int intResult = memberDao.joinEmailCheck(email);
 		if(intResult>0){
 			result = "N";
 		}else{
@@ -76,7 +82,7 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public String joinMobnoCheck(String mobno) {
 		String result ="";
-		int intResult = mainDao.joinMobnoCheck(mobno);
+		int intResult = memberDao.joinMobnoCheck(mobno);
 		if(intResult>0){
 			result = "N";
 		}else{
@@ -99,7 +105,7 @@ public class MainServiceImpl implements MainService {
 	public String join(MemberDto memberDto, String returnUrl, Model model) {
 		memberDto.setStatus(MemberStatus.NOMAL);
 		memberDto.setCategory(MemberCategory.NOMAL);
-		mainDao.join(memberDto);
+		memberDao.join(memberDto);
 		model.addAttribute("returnUrl",returnUrl);
 		return "redirect:loginForm.do";
 	}
@@ -116,14 +122,15 @@ public class MainServiceImpl implements MainService {
 	public String login(HttpSession session, String id, String pass , String returnUrl, Model model) {
 		String url ="";
 		System.out.println("id: " + id);
-		String resultPass = mainDao.login(id);
+		String resultPass = memberDao.login(id);
 		if(resultPass != null){
 			if(resultPass.equals(pass)){//로그인
 				url="redirect:"+returnUrl;
 				session.setAttribute("id", id);
-				memberDto=mainDao.getMember(id);
+				memberDto=memberDao.getMember(id);
 				session.setAttribute("category", memberDto.getCategory());
 				session.setAttribute("name", memberDto.getName());
+				session.setAttribute("memberNo", memberDto.getMemberNo());
 			}else{//비번틀림
 				url="etc/message";
 				model.addAttribute("returnUrl", returnUrl);
@@ -144,8 +151,7 @@ public class MainServiceImpl implements MainService {
 		String returnUrl=request.getHeader("referer");
 		String id = (String)session.getAttribute("id");
 		if(id != null){
-			session.removeAttribute("id");
-			session.removeAttribute("category");
+			session.invalidate();
 			model.addAttribute("message", "로그아웃 되었습니다.");
 			model.addAttribute("url", returnUrl);
 		}else{
@@ -176,7 +182,7 @@ public class MainServiceImpl implements MainService {
 			hm.put("id", text);
 		}
 		hm.put("email", email);
-		int dbResult = mainDao.emailByName(hm);
+		int dbResult = memberDao.emailByName(hm);
 		if(dbResult > 0 ){
 			String num = randomNum.randomNumber();
 			sendMail.setContent(MakeMail.makeContent(num));
@@ -203,7 +209,7 @@ public class MainServiceImpl implements MainService {
 		hm.put("name", name);
 		hm.put("email", email);
 		
-		memberDto = mainDao.findId(hm);
+		memberDto = memberDao.findId(hm);
 		model.addAttribute("returnUrl", ReturnUrl.returnUrlCheck(returnUrl, request));
 		model.addAttribute("member", memberDto);
 		return "member/findResult";
@@ -218,7 +224,7 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public String findPass(String sbText, String sbEmail, String returnUrl, Model model, HttpServletRequest request, HttpServletResponse response) {
 		
-		String dbId = mainDao.findPass(sbEmail);
+		String dbId = memberDao.findPass(sbEmail);
 		if(sbText==null || !sbText.equals(dbId)){
 			model.addAttribute("message", "잘못된 접근입니다..");
 			model.addAttribute("url", "main.do");
@@ -259,7 +265,7 @@ public class MainServiceImpl implements MainService {
 		String url = "";
 		hm.put("id", id);
 		hm.put("pass", pass);
-		int result = mainDao.changPass(hm);
+		int result = memberDao.changPass(hm);
 		if (result == 1 ){
 			message = "정상 처리 되었습니다.";
 			url = "loginForm.do";
@@ -277,7 +283,7 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public String myPage(HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
-		memberDto = mainDao.getMember(id);
+		memberDto = memberDao.getMember(id);
 		model.addAttribute("member", memberDto);
 		if(memberDto.getCategory()>=5){
 			dataDto = dataDao.getMemberData(memberDto.getDataNum());
@@ -291,10 +297,101 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public String infoChangeForm(HttpSession session, Model model) {
 		String id = (String)session.getAttribute("id");
-		memberDto = mainDao.getMember(id);
+		memberDto = memberDao.getMember(id);
 		model.addAttribute("member", memberDto);
 		
 		return "member/inforChange";
+	}
+
+	@Override
+	public String inquiry(HttpSession session, Model model, String pageNum) {
+		String id = (String)session.getAttribute("id");
+		int memberNo = (Integer)session.getAttribute("memberNo");
+		int totalCount=0;		
+		int pageSize=10;
+	    int pageBlock=10;
+	    totalCount = memberDao.getInquCount(memberNo);
+	    if(pageNum == null || pageNum.equals("")){
+	    	pageNum ="1";
+	    }
+	    
+	    page.paging(Integer.parseInt(pageNum),totalCount,pageSize, pageBlock,"inquiry.do");
+	    List<InquiryDto> inquList=null;
+	    Map<String, Integer> hm= new HashMap<>();
+	    hm.put("startRow", page.getStartRow());
+	    hm.put("endRow", page.getEndRow());
+	    hm.put("memberNo", memberNo);
+	    inquList=memberDao.getinquList(hm);
+	    
+	    model.addAttribute("inquList", inquList);
+	    model.addAttribute("pageCode", page.getSb().toString());
+	    
+	    return "member/inquiry";
+	}
+
+	@Override
+	public String withdrawalForm(HttpSession session, Model model) {
+		return "member/withdrawal";
+	}
+
+	@Override
+	public String withdrawal(HttpSession session, Model model, String pass) {
+		int memberNo = (Integer)session.getAttribute("memberNo");
+		String id = (String)session.getAttribute("id");
+		String url ="";
+		String message = "";
+		String resultPass = memberDao.login(id);
+		Map<String, Object> hm= null;
+		if(resultPass != null){
+			if(resultPass.equals(pass)){// 탈퇴
+				session.invalidate();
+				hm=new HashMap<>();
+				hm.put("status", MemberStatus.DROP);
+				hm.put("memberNo", memberNo);
+				memberDao.withdrawal(hm);
+				url = "main.do";
+				message = "탈퇴가 되었습니다.";
+			}else{//비번틀림
+				url = "withdrawalForm.do";
+				message = "비밀번호가 틀렸습니다.";
+			}
+		}else{//아이디 없음?
+			url="withdrawalForm.do";
+			message = "뭐죠?";
+		}
+		model.addAttribute("url", url);
+		model.addAttribute("message", message);
+		
+		return "etc/message";
+	}
+
+	@Override
+	public String askForm(HttpSession session, Model model) {
+		
+		return "member/ask";
+	}
+
+	@Override
+	public String ask(HttpSession session, Model model, String category) {
+		String id = (String)session.getAttribute("id");
+		System.out.println(category);
+		Map<String, String> hm = new HashMap<>();
+		hm.put("id", id);
+		hm.put("category", category);
+		session.setAttribute("category", Integer.parseInt(category));
+		memberDao.ask(hm);
+		
+		return "redirect:myPage.do";
+	}
+
+	@Override
+	public String cancel(HttpSession session, Model model) {
+		String id = (String)session.getAttribute("id");
+		memberDao.cencel(id);
+		session.setAttribute("category", 0);
+		model.addAttribute("message","신청이 취소 되었습니다.");
+		model.addAttribute("url","myPage.do");
+		return "etc/message";
 	}
 	
 	

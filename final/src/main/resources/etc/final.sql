@@ -140,6 +140,7 @@ create table board(
   groupId number not null,
   writeDate date not null,
   fileStatus number not null,
+  boardStatus number not null,
   CONSTRAINT board_fk foreign key(writer)
   REFERENCES member(memberno)
 );

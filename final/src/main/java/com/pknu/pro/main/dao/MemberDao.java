@@ -1,7 +1,10 @@
 package com.pknu.pro.main.dao;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import com.pknu.pro.main.dto.InquiryDto;
 import com.pknu.pro.main.dto.MemberDto;
 
 public interface MemberDao {
@@ -16,4 +19,9 @@ public interface MemberDao {
 	public int changPass(HashMap<String, String> hm);
 	public MemberDto getMember(String id);
 	public int getMemberCategory(String id);
+	public int getInquCount(int memberNo);
+	public List<InquiryDto> getinquList(Map<String, Integer> hm);
+	public void withdrawal(Map<String, Object> hm);
+	public void ask(Map<String, String> hm);
+	public void cencel(String id);
 }

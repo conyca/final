@@ -1,22 +1,12 @@
 package com.pknu.pro.main.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.pknu.pro.main.captcha.AudioCaptCha;
-import com.pknu.pro.main.captcha.CaptCha;
-import com.pknu.pro.main.dto.MemberDto;
 import com.pknu.pro.main.service.MainService;
 
-import nl.captcha.Captcha;
 
 @Controller
 public class MainController {
@@ -27,6 +17,16 @@ public class MainController {
 	@RequestMapping("/main.do")
 	public String main(){
 		return "main/main";
+	}
+	
+	@RequestMapping("/error.do")
+	public String error(String messageType, String url, Model model){
+		
+		if(messageType.equals("1")){
+			model.addAttribute("message", "잘못된 접근입니다.");
+		}
+		model.addAttribute("url", url);
+		return "etc/message";		
 	}
 	
 	
