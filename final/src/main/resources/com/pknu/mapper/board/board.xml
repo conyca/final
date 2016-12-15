@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+              
+<mapper namespace="com.pknu.pro.board.dao.BoardDao">
+	<select id="getBoardCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM board
+		WHERE kind = #{kind}
+	</select>
+	
+	<select id="getBoards" parameterType="hashMap" resultType="board">
+		SELECT *
+		FROM ( SELECT ROWNUM rm, b.* 
+				FROM (SELECT * FROM board ORDER BY boardNum desc) b
+				) 
+		WHERE rm BETWEEN #{startRow} and #{endRow}
+	</select>
+	
+</mapper>

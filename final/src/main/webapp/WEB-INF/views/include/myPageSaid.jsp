@@ -69,7 +69,7 @@
 					</div>
 					<c:if test="${sessionScope.category eq 0 }">
 						<div id = "mobileAsideId">
-							<a href = "">정회원 신청하기</a>
+							<a href = "askForm.do">정회원 신청하기</a>
 						</div>
 					</c:if>
 					

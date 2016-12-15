@@ -47,7 +47,10 @@
 	  <property name="mapperInterface" value="com.pknu.pro.main.dao.DataDao" />		
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
-	
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="boardDao">
+	  <property name="mapperInterface" value="com.pknu.pro.board.dao.BoardDao" />		
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 
 	
 	

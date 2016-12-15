@@ -183,8 +183,12 @@ create sequence comm_seq
   start with 1
   increment by 1;
 
+drop table filelist;
 create table filelist(
   storedFname varchar2(1000) primary key,
   filelength number not null,
-  boardNum number not null
+  boardNum number not null,
+  CONSTRAINT file_fk foreign key(boardNum)
+  REFERENCES board(boardNum)
+  
 );

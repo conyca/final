@@ -37,7 +37,7 @@ window.onresize = winsdowSize;
 	
 	<div id = "logo" >
 		<a href ="main.do">
-			<img src="./resources/img/main/header/logo.png">
+			<img src="resources/img/main/header/logo.png">
 		</a>
 	</div>
 	

@@ -1,10 +1,24 @@
 package com.pknu.pro.main.controller;
 
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URLEncoder;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.pknu.pro.main.service.MainService;
 
 
@@ -28,7 +42,6 @@ public class MainController {
 		model.addAttribute("url", url);
 		return "etc/message";		
 	}
-	
 	
 	
 	// captcha ¿ÃπÃ¡ˆ
