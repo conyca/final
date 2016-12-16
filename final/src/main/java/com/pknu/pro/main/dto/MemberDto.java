@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MemberDto {
 	
-	private int memberNo;
 	private String id;
 	private String pass;
 	private String name;
@@ -25,12 +24,6 @@ public class MemberDto {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public int getMemberNo() {
-		return memberNo;
-	}
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
 	}
 	public String getId() {
 		return id;
@@ -100,11 +93,11 @@ public class MemberDto {
 	}
 	@Override
 	public String toString() {
-		return "MemberDto [memberNo=" + memberNo + ", id=" + id + ", pass=" + pass + ", name=" + name + ", sex=" + sex
-				+ ", birthday=" + birthday + ", email=" + email + ", mobno=" + mobno + ", status=" + status
-				+ ", category=" + category + ", regDate=" + regDate + ", adjDate=" + adjDate + ", dataNum=" + dataNum
-				+ "]";
+		return "MemberDto [id=" + id + ", pass=" + pass + ", name=" + name + ", sex=" + sex + ", birthday=" + birthday
+				+ ", email=" + email + ", mobno=" + mobno + ", status=" + status + ", category=" + category
+				+ ", regDate=" + regDate + ", adjDate=" + adjDate + ", dataNum=" + dataNum + "]";
 	}
+	
 	
 	
 	

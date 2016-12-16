@@ -1,0 +1,11 @@
+
+      
+      insert into member
+      VALUES ( 'admin', 'asdf123', '관리자', 0, '19991212', 'conyca@naver.com', '01030953302', 'nomal', 10, sysdate, null, null );
+     
+     update member set dataNum = 1
+     where id='admin';
+     
+      insert into data
+      VALUES ( 1, '관리자', 10, '즈그집', null, null,null,null, null);
+      

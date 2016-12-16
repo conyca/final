@@ -19,9 +19,10 @@ public interface MemberDao {
 	public int changPass(HashMap<String, String> hm);
 	public MemberDto getMember(String id);
 	public int getMemberCategory(String id);
-	public int getInquCount(int memberNo);
-	public List<InquiryDto> getinquList(Map<String, Integer> hm);
+	public int getInquCount(String id);
+	public List<InquiryDto> getinquList(Map<String, Object> hm);
 	public void withdrawal(Map<String, Object> hm);
 	public void ask(Map<String, String> hm);
 	public void cencel(String id);
+	public void infoChange(Map<String, Object> hm);
 }

@@ -1,1 +1,2 @@
 카카오 javascript 키 : aa626620e80b79ff0cb41d8b9d490417
+문자 전송 api http://www.coolsms.co.kr/ 유료 결제 할것

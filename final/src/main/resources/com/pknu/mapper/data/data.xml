@@ -5,9 +5,9 @@
 <mapper namespace="com.pknu.pro.main.dao.DataDao">
 	
 	<select id="getMemberData" parameterType="int" resultType="data">
-		select d.*, c.className as className from data d, class c 
+		select d.*, c.className as className from data d, classes c 
 		where d.classNum = c.classNum
-		and dataNum = #{dataNum}
+		and dataNum = #{dataNum} 
 	</select>
 	
 </mapper>

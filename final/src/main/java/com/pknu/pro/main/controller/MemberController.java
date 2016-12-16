@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.pknu.pro.main.dto.MemberDto;
 import com.pknu.pro.main.service.MainService;
 
 @Controller
@@ -33,6 +34,13 @@ public class MemberController {
 		
 		return mainService.infoChangeForm(session,model);
 	}
+	
+	@RequestMapping("/infoChange.do")
+	public String infoChange(HttpSession session, HttpServletRequest request, Model model, MemberDto memberDto){
+		return mainService.infoChange(session, model, memberDto);
+	}
+	
+	
 	
 	@RequestMapping("/inquiry.do")
 	public String inquiry(HttpSession session, HttpServletRequest request, Model model, String pageNum){

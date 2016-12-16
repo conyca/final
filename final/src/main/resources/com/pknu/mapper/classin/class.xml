@@ -5,7 +5,7 @@
 <mapper namespace="com.pknu.pro.main.dao.ClassDao">
 	
 	<select id="getClassName" parameterType="int" resultType="String">
-		select className from class
+		select className from classes
 		where classNum = #{classNum}	
 	</select>
 	

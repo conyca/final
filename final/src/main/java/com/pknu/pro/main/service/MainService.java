@@ -11,7 +11,7 @@ import com.pknu.pro.main.dto.MemberDto;
 public interface MainService {
 
 	
-	
+	public String main(Model model);
 	public String joinIdCheck(String id);
 	public String joinEmailCheck(String email);
 	public String joinMobnoCheck(String mobno);
@@ -37,5 +37,6 @@ public interface MainService {
 	public String askForm(HttpSession session, Model model);
 	public String ask(HttpSession session, Model model, String category);
 	public String cancel(HttpSession session, Model model);
+	public String infoChange(HttpSession session, Model model, MemberDto memberDto);
 	
 }

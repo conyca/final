@@ -1,7 +1,6 @@
 DROP TABLE member;
 CREATE TABLE member (
-  memberno NUMBER PRIMARY KEY,
-  id VARCHAR2(20) NOT NULL UNIQUE,
+  id VARCHAR2(20) PRIMARY KEY,
   pass VARCHAR2(20) NOT NULL,
   name VARCHAR2(50) NOT NULL,
   sex NUMBER(1) NOT NULL,
@@ -18,10 +17,6 @@ CREATE TABLE member (
   REFERENCES data(dataNum)
 );
 
-CREATE SEQUENCE mem_seq
-  START WITH 1
-  INCREMENT BY 1;
-
 DROP TABLE data;
 CREATE TABLE data(
   dataNum NUMBER PRIMARY KEY,
@@ -34,17 +29,15 @@ CREATE TABLE data(
   school VARCHAR2(50),
   parents number,
   CONSTRAINT data_fk foreign key(parents)
-  REFERENCES data(dataNum),
-  CONSTRAINT data_fk2 foreign key(classNum)
-  REFERENCES class(classNum)
+  REFERENCES data(dataNum)
 );
 
 CREATE SEQUENCE data_seq
   START WITH 1
   INCREMENT BY 1;
 
-drop table class;
-CREATE TABLE class(
+drop table classes;
+CREATE TABLE classes(
   classNum number primary key,
   className varchar2(50) not null,
   classManager number,
@@ -77,12 +70,12 @@ create table timetable(
   startTime varchar2(50) not null,
   endTime varchar2(50) not null,
   dow varchar2(50) not null,
-  classNo number not null,
+  classNum number not null,
   adjDate date not null,
   CONSTRAINT timetable_fk1 foreign key(subject)
   REFERENCES subject(subjectNum),
-  CONSTRAINT timetable_fk2 foreign key(class)
-  REFERENCES class(classNum)
+  CONSTRAINT timetable_fk2 foreign key(classNum)
+  REFERENCES classes(classNum)
 );
 
 create sequence time_seq
@@ -96,10 +89,10 @@ create table schedule(
   content varchar2(2000) not null,
   regDate date not null,
   opDate date not null,
-  writer number not null,
+  writer varchar2(20) not null,
   status number not null,
   CONSTRAINT schedule_fk foreign key(writer)
-  REFERENCES member(memberno)
+  REFERENCES member(id)
 );
 create sequence scd_seq
   start with 1
@@ -112,12 +105,12 @@ create table advice(
   content varchar2(3000) not null,
   regDate date not null,
   target number not null,
-  writer number not null,
+  writer varchar2(20) not null,
   subContent varchar2(3000) not null,
   CONSTRAINT advice_fk1 foreign key(target)
   REFERENCES data(dataNum),
   CONSTRAINT advice_fk2 foreign key(writer)
-  REFERENCES member(memberno)
+  REFERENCES member(id)
 );
 
 create sequence adv_seq
@@ -126,11 +119,11 @@ create sequence adv_seq
 
 
 
-
+drop table board;
 create table board(
   boardNum number primary key,
   kind number not null,
-  writer number not null,
+  writer varchar2(20) not null,
   category number not null,
   boardNo number  not null,
   title varchar2(2000) not null,
@@ -142,7 +135,7 @@ create table board(
   fileStatus number not null,
   boardStatus number not null,
   CONSTRAINT board_fk foreign key(writer)
-  REFERENCES member(memberno)
+  REFERENCES member(id)
 );
 create sequence board_seq
   start with 1
@@ -150,33 +143,37 @@ create sequence board_seq
   
   
   --문의 게시판
+drop table inquiry;
 create table inquiry(
   inquNum number primary key,
   content varchar2(3000) not null,
-  memberNo number not null,
+  id varchar2(20) not null,
   regDate date not null,
   answer varchar2(3000),
-  anAnswer number,
+  anAnswer varchar2(20),
   answerDate date,
   status number,
-  CONSTRAINT inqu_fk1 foreign key(memberNo)
-  REFERENCES member(memberno),
+  CONSTRAINT inqu_fk1 foreign key(id)
+  REFERENCES member(id),
   CONSTRAINT inqu_fk2 foreign key(anAnswer)
-  REFERENCES member(memberno)
+  REFERENCES member(id)
 );
 
 create sequence inqu_seq
   start with 1
   increment by 1;
   
+drop table comments;
 create table comments(
   commnetNum number primary key,
-  memberNo number not null,
+  id varchar2(20) not null,
   content clob not null,
   commentDate date not null,
   boardNum number not null,
   CONSTRAINT comment_fk foreign key(boardNum)
-  REFERENCES board(boardNum)
+  REFERENCES board(boardNum),
+  CONSTRAINT comment_fk2 foreign key(id)
+  REFERENCES member(id)
 );
 
 create sequence comm_seq

@@ -13,7 +13,7 @@ public class BoardDto {
 	private int depth;
 	private int hit;
 	private int groupId;
-	private String wirteDate;
+	private String writeDate;
 	private int fileStatus;
 	private int boardStatus;
 	private int commentCount;
@@ -79,11 +79,11 @@ public class BoardDto {
 	public void setGroupId(int groupId) {
 		this.groupId = groupId;
 	}
-	public String getWirteDate() {
-		return wirteDate;
+	public String getWriteDate() {
+		return writeDate;
 	}
-	public void setWirteDate(String wirteDate) {
-		this.wirteDate = wirteDate;
+	public void setWriteDate(String writeDate) {
+		this.writeDate = writeDate;
 	}
 	public int getFileStatus() {
 		return fileStatus;
@@ -113,7 +113,7 @@ public class BoardDto {
 	public String toString() {
 		return "BoardDto [boardNum=" + boardNum + ", kind=" + kind + ", writer=" + writer + ", category=" + category
 				+ ", boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", depth=" + depth + ", hit="
-				+ hit + ", groupId=" + groupId + ", wirteDate=" + wirteDate + ", fileStatus=" + fileStatus
+				+ hit + ", groupId=" + groupId + ", writeDate=" + writeDate + ", fileStatus=" + fileStatus
 				+ ", boardStatus=" + boardStatus + ", commentCount=" + commentCount + ", fileNames=" + fileNames + "]";
 	}
 	

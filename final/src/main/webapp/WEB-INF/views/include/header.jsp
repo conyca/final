@@ -36,7 +36,7 @@ window.onresize = winsdowSize;
 	<div id = "myPageBtn" class="hiddenBtn"></div>
 	
 	<div id = "logo" >
-		<a href ="main.do">
+		<a href ="/final/main.do"> 
 			<img src="resources/img/main/header/logo.png">
 		</a>
 	</div>

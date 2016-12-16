@@ -76,7 +76,7 @@
 	
 	<select id="getInquCount" parameterType="int" resultType="int">
 		SELECT COUNT(inquNum) FROM inquiry 
-		WHERE memberNo = #{memberNo}
+		WHERE id = #{id}
 	</select>
 	
 	<select id="getinquList" parameterType="hashMap" resultType="inqu">
@@ -86,8 +86,8 @@
 				FROM (SELECT i.inquNum inquNum, i.content content, m.id id, i.regDate regDate,
 							 i.answer answer, a.id answerId, i.answerDate, i.status status 
 					  From inQuiry i, member m, member a 
-					  WHERE i.memberNo=m.memberNo 
-					  AND nvl(i.anAnswer,1) = a.memberNo 
+					  WHERE i.id=m.id 
+					  AND nvl(i.anAnswer, '관리자') = a.id 
 					  ORDER BY i.inquNum desc 
 							  ) inpu
 				)
@@ -96,7 +96,7 @@
 	
 	<update id="withdrawal" parameterType="hashMap">
 		UPDATE member SET status = #{status} 
-		WHERE memberNo = #{memberNo}
+		WHERE id = #{id}
 	</update>
 	
 	<update id="ask" parameterType="hashMap">
@@ -107,6 +107,11 @@
 	<update id="cencel" parameterType="String">
 		UPDATE member set category = 0 
 		WHERE id = #{id}
+	</update>
+	
+	<update id="infoChange" parameterType="hashMap">
+		UPDATE member SET  
+		WHERE id = #{id }
 	</update>
 	
 </mapper>

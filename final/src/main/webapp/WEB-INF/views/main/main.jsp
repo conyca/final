@@ -50,24 +50,16 @@
 					<th>내용</th>
 					<th>날짜</th>
 				</tr>
-				<tr>
-					<td>내용</td>
-					<td>날짜</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>날짜</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>날짜</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>날짜</td>
-				</tr>
+				<c:if test="${!empty noticeList }">
+					<c:forEach items="${noticeList }" var="nList">
+						<tr>
+							<td><a href="/final/notice/content.do?pageNum=1&boardNum=${nList.boardNum }">${nList.title }</a></td>
+							<td>${fn:substring(nList.writeDate,0,10) }</td>
+						</tr>
+					</c:forEach>
+				</c:if>
 			</table>
-			<span><a>더보기...</a></span>
+			<span><a href="/final/notice/list.do?pageNum=1">더보기...</a></span>
 		</div>
 		<div>
 			<span>자유게시판</span>
@@ -93,7 +85,7 @@
 					<td>날짜</td>
 				</tr>
 			</table>
-			<span><a>더보기...</a></span>
+			<span><a href ="">더보기...</a></span>
 		</div>
 		<div>
 			<span>학원소식</span>

@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.pknu.pro.board.dao.BoardDao;
+import com.pknu.pro.board.dto.BoardDto;
 import com.pknu.pro.main.captcha.AudioCaptCha;
 import com.pknu.pro.main.dao.ClassDao;
 import com.pknu.pro.main.dao.DataDao;
@@ -54,6 +56,18 @@ public class MainServiceImpl implements MainService {
 	MemberDto memberDto;
 	DataDto dataDto;
 	
+	@Autowired
+	BoardDao boardDao;
+	
+	@Override
+	public String main(Model model) {
+		
+		// 공지사항 4개 담기
+		model.addAttribute("noticeList", boardDao.getMainBoards());
+		
+		return "main/main";
+	}
+
 	@Override
 	public String joinIdCheck(String id) {
 		String result ="";
@@ -130,7 +144,6 @@ public class MainServiceImpl implements MainService {
 				memberDto=memberDao.getMember(id);
 				session.setAttribute("category", memberDto.getCategory());
 				session.setAttribute("name", memberDto.getName());
-				session.setAttribute("memberNo", memberDto.getMemberNo());
 			}else{//비번틀림
 				url="etc/message";
 				model.addAttribute("returnUrl", returnUrl);
@@ -306,21 +319,20 @@ public class MainServiceImpl implements MainService {
 	@Override
 	public String inquiry(HttpSession session, Model model, String pageNum) {
 		String id = (String)session.getAttribute("id");
-		int memberNo = (Integer)session.getAttribute("memberNo");
 		int totalCount=0;		
 		int pageSize=10;
 	    int pageBlock=10;
-	    totalCount = memberDao.getInquCount(memberNo);
+	    totalCount = memberDao.getInquCount(id);
 	    if(pageNum == null || pageNum.equals("")){
 	    	pageNum ="1";
 	    }
 	    
 	    page.paging(Integer.parseInt(pageNum),totalCount,pageSize, pageBlock,"inquiry.do");
 	    List<InquiryDto> inquList=null;
-	    Map<String, Integer> hm= new HashMap<>();
+	    Map<String, Object> hm= new HashMap<>();
 	    hm.put("startRow", page.getStartRow());
 	    hm.put("endRow", page.getEndRow());
-	    hm.put("memberNo", memberNo);
+	    hm.put("id", id);
 	    inquList=memberDao.getinquList(hm);
 	    
 	    model.addAttribute("inquList", inquList);
@@ -336,7 +348,6 @@ public class MainServiceImpl implements MainService {
 
 	@Override
 	public String withdrawal(HttpSession session, Model model, String pass) {
-		int memberNo = (Integer)session.getAttribute("memberNo");
 		String id = (String)session.getAttribute("id");
 		String url ="";
 		String message = "";
@@ -347,7 +358,7 @@ public class MainServiceImpl implements MainService {
 				session.invalidate();
 				hm=new HashMap<>();
 				hm.put("status", MemberStatus.DROP);
-				hm.put("memberNo", memberNo);
+				hm.put("id", id);
 				memberDao.withdrawal(hm);
 				url = "main.do";
 				message = "탈퇴가 되었습니다.";
@@ -392,6 +403,30 @@ public class MainServiceImpl implements MainService {
 		model.addAttribute("message","신청이 취소 되었습니다.");
 		model.addAttribute("url","myPage.do");
 		return "etc/message";
+	}
+
+	@Override
+	public String infoChange(HttpSession session, Model model, MemberDto memberDto) {
+		
+		String id = (String)session.getAttribute("id");
+		String resultPass = memberDao.login(id);
+		String resutl ="";
+		if(resultPass.equals(memberDto.getPass())){
+			//비밀번호 맞음! 회원정보 변경!
+			Map<String, Object> hm = new HashMap<>();
+			hm.put("id", id);
+			hm.put("memberDto", memberDto);
+			memberDao.infoChange(hm);
+			resutl = "redirect:myPage.do";
+		}else{
+			//비밀번호 틀림!
+			model.addAttribute("message", "비밀번호가 틀렸습니다.");
+			model.addAttribute("url", "infoChangeFrom.do");
+			resutl= "etc/message";
+		}
+		
+		
+		return resutl;
 	}
 	
 	

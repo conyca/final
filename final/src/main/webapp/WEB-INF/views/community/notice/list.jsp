@@ -15,14 +15,14 @@
 </head> 
 <body>
 	
-	<%@ include file="../../include/header.jsp" %>
+	<%@ include file="../../include/childHeader.jsp" %>
 	
 	<article>
 		<div>
 			<div>공지사항</div>
 			<div>
 				<c:if test="${sessionScope.category >=8 }">
-					<a href ="notice/wirteForm.do?pageNum=${pageNum }">글쓰기</a>
+					<a href ="writeForm.do?pageNum=${pageNum }">글쓰기</a>
 				</c:if>
 			</div>
 			<div>
@@ -37,10 +37,10 @@
 				<c:if test="${!empty list }">
 					<c:forEach items="${list }" var="item">
 						<div>
-							<span>${item.boardNum }</span>
-							<span>${item.title }</span>
+							<span>${item.boardNo }</span>
+							<span><a href ="content.do?pageNum=${pageNum }&boardNum=${item.boardNum}">${item.title }</a></span>
 							<span>${item.writer }</span>
-							<span>${item.writeDate }</span>
+							<span>${fn:substring(item.writeDate,0,10)}</span>
 							<span>${item.hit }</span>
 						</div>
 					</c:forEach>
@@ -60,6 +60,6 @@
 		</div>
 	</article>
 	
-	<%@ include file="../../include/footer.jsp"  %>
+	<%@ include file="../../include/childFooter.jsp"  %>
 </body>
 </html>

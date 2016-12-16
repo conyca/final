@@ -12,6 +12,53 @@
 <title>행복하니? 행복학원!</title>
 <link rel="stylesheet" href="./resources/css/member/myPage/myPageStyle.css">
 <script src="./resources/js/jquery/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	function onSubmit(){
+		
+		if($("#pass").val() == ""){
+			alert("비밀번호를 입력하세요");
+			$("#pass").focus();
+			return false;
+		}
+		if($("#name").val()==""){
+			alert("이름을 입력하세요");
+			$("#name").focus();
+			return false;
+		}
+		if($("#year").val()==""){
+			alert("생년을 입력하세요");
+			$("#year").focus();
+			return false;
+		}
+		if($("#month").val()==""){
+			alert("생년을 입력하세요");
+			$("#month").focus();
+			return false;
+		}
+		if($("#day").val()==""){
+			alert("생년을 입력하세요");
+			$("#day").focus();
+			return false;
+		}
+		if($("#email").val()==""){
+			alert("생년을 입력하세요");
+			$("#email").focus();
+			return false;
+		}
+		if($("#mobno").val()==""){
+			alert("생년을 입력하세요");
+			$("#mobno").focus();
+			return false;
+		}
+		
+		if(confirm("변경하시겠습니까?")==true){
+			$("#birthday").val($("#year").val()+$("#month").val()+$("#daty").val());
+			return true;
+		}
+		return false;		
+		
+	}
+</script>
 </head>
 <body>
 	
@@ -25,7 +72,7 @@
 			<c:set var="day">${fn:substring(member.birthday,6,8)  }</c:set>
 			<aside class= "">
 				회원정보
-				<form action="">
+				<form action="infoChange.do" method="post" name ="fr" onsubmit="return onSubmit();">
 					<input type="hidden" name = "birthday" id="birthday">
 					<table>
 						<tr>
@@ -36,13 +83,13 @@
 						<tr>
 							<td>비밀번호</td>
 							<td>
-								<input type ="password" name = "pass">
+								<input type ="password" name = "pass" id="pass">
 							</td>
 						</tr>
 						
 						<tr>
 							<td>이름</td>
-							<td><input type="text" value="${member.name }" name ="name"></td>
+							<td><input type="text" value="${member.name }" name ="name" id="name"></td>
 						</tr>
 						<tr>
 							<td>성별</td>
@@ -70,13 +117,13 @@
 						<tr>
 							<td>이메일</td>
 							<td>
-								<input type="text" value="${member.email }" name="email">
+								<input type="text" value="${member.email }" name="email" id="email">
 							</td>
 						</tr>
 						<tr>
 							<td>휴대전화번호</td>
 							<td>
-								<input type="text" value="${member.mobno }" name="mobno">
+								<input type="text" value="${member.mobno }" name="mobno" id="mobno">
 							</td>
 						</tr>
 						<tr>

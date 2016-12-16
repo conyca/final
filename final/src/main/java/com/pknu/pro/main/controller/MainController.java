@@ -29,8 +29,9 @@ public class MainController {
 	MainService mainService;
 	
 	@RequestMapping("/main.do")
-	public String main(){
-		return "main/main";
+	public String main(Model model){
+		
+		return mainService.main(model);
 	}
 	
 	@RequestMapping("/error.do")

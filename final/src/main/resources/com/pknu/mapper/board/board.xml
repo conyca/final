@@ -12,9 +12,47 @@
 	<select id="getBoards" parameterType="hashMap" resultType="board">
 		SELECT *
 		FROM ( SELECT ROWNUM rm, b.* 
-				FROM (SELECT * FROM board ORDER BY boardNum desc) b
+				FROM (SELECT  b.boardNum, b.kind, m.id writer, b.category, b.boardNo, b.title, b.content, b.hit, b.boardStatus 
+            from board b, member m 
+						WHERE boardStatus = 0 
+            AND b.writer = m.id
+						AND kind = #{kind}
+						ORDER BY boardNum desc) b
 				) 
 		WHERE rm BETWEEN #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getBoardMaxNo" parameterType="int" resultType="integer">
+		SELECT MAX(boardNo) FROM board 
+		WHERE kind = #{kind}
+	</select>
+	
+	<insert id="write" parameterType="hashMap">
+		INSERT INTO board 
+		values (board_seq.nextval, #{board.kind}, #{writer}, 0, #{board.boardNo}, 
+				#{board.title}, #{board.content}, 0, 0, 0, sysdate, 0, 0)
+	</insert>
+	
+	<select id="getBoard" parameterType="int" resultType="board">
+		SELECT * FROM board
+		WHERE boardNum =#{boardNum}
+	</select>
+	
+	<select id="getCurrentBoardNum" parameterType="hashMap" resultType="int">
+		SELECT boardNum FROM board
+		WHERE kind = #{kind} AND boardNo = #{boardNo}
+	</select>
+	
+	<select id="getMainBoards"  resultType="board">
+		select * from 
+			(select rownum rm, b.* from 
+				(select * from board 
+					where boardStatus = 0
+					and kind = 0 
+					order by boardNum desc
+					) b 
+				)
+			where rm between 1 and 4
 	</select>
 	
 </mapper>
