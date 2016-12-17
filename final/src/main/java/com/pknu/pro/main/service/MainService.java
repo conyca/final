@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import com.pknu.pro.main.dto.MemberDto;
 
-public interface MainService {
+public interface MainService { 
 
 	
 	public String main(Model model);
