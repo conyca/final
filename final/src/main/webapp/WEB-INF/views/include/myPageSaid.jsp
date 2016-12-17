@@ -69,7 +69,7 @@
 					</div>
 					<c:if test="${sessionScope.category eq 0 }">
 						<div id = "mobileAsideId">
-							<a href = "askForm.do">정회원 신청하기</a>
+							<a href = "/final/askForm.do">정회원 신청하기</a>
 						</div>
 					</c:if>
 					
@@ -113,18 +113,18 @@
 			
 			<li class= "memberItem">
 				<div>
-					<a href="myPage.do?returnUrl=${returnUrl }">회원 정보</a>
+					<a href="/final/myPage.do">회원 정보</a>
 				</div>
 				
 				<div>
-					<a href="">회원 정보 수정</a>
+					<a href="/final/infoChangeForm.do">회원 정보 수정</a>
 				</div>
 				
 				<div>
-					<a href="">문의 내역 및 답변</a>
+					<a href="/final/inquiry.do">문의 내역 및 답변</a>
 				</div>
 				<div>
-					<a href="">탈퇴</a>
+					<a href="/final/withdrawalForm.do">탈퇴</a>
 				</div>
 			</li>
 			

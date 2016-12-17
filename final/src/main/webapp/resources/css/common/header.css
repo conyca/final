@@ -83,6 +83,9 @@
 		background-size: 100% 100%;
 	}
 	
+	
+	
+	
 }
 
 /* 모바일 외 */
@@ -127,7 +130,17 @@
 		margin : 0 10px 0 10px;
 		font-weight: bolder;
 		
-	}
+	} 
+	 
+	.gnbMenu {
+		display: none; 
+		width:500px;
+		height: 300px;
+		background-color: yellow;
+		
+		
+	} 
+	 
 	
 	
 	
