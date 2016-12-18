@@ -98,7 +98,7 @@ window.onresize = winsdowSize;
 		<div>
 		<!-- 학원소개 -->
 			<ul>
-				<li></li>
+				<li>학원소개</li>
 				<li></li>
 				<li></li>
 				<li></li>
