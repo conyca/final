@@ -58,6 +58,12 @@
 						</tr>
 					</c:forEach>
 				</c:if>
+				<c:if test="${empty noticeList }">
+					<tr>
+						<td colspan="2">게시글이 없습니다.</td>
+					</tr>
+				</c:if>
+				
 			</table>
 			<span><a href="/final/notice/list.do?pageNum=1">더보기...</a></span>
 		</div>
@@ -68,24 +74,22 @@
 					<th>내용</th>
 					<th>날짜</th>
 				</tr>
-				<tr>
-					<td>내용</td>
-					<td>날짜</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>날짜</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>날짜</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td>날짜</td>
-				</tr>
+				<c:if test="${!empty freeList }">
+					<c:forEach items="${freeList }" var="fList">
+						<tr>
+							<th><a href="/final/freeBoard/content.do?pageNum=1&boardNum=${fList.boardNum }">${fList.title }</a></th>
+							<td>${fn:substring(fList.writeDate,0,10) }</td>
+						</tr>
+					</c:forEach>
+				</c:if>
+				
+				<c:if test="${empty freeList }">
+					<tr>
+						<td colspan="2" style="text-align: center;">게시글이 없습니다.</td>
+					</tr> 
+				</c:if>
 			</table>
-			<span><a href ="">더보기...</a></span>
+			<span><a href ="/final/freeBoard/list.do?pageNum=1">더보기...</a></span>
 		</div>
 		<div>
 			<span>학원소식</span>

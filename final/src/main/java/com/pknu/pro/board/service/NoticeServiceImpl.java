@@ -12,16 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.pknu.pro.board.dao.BoardDao;
+import com.pknu.pro.board.dao.NoticeDao;
 import com.pknu.pro.board.dto.BoardDto;
 import com.pknu.pro.board.util.FileUploaderHtml5;
 import com.pknu.pro.util.Page;
 
 @Service
-public class BoardServiceImpl implements BoardService {
+public class NoticeServiceImpl implements NoticeService {
 
 	@Autowired
-	BoardDao boardDao;
+	NoticeDao boardDao;
 	
 	@Autowired
 	Page page;
@@ -70,7 +70,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public String write(HttpSession session, BoardDto getBoardDto, String ir1, String pageNum) {
 		char c = '"';
-		ir1 = ir1.replace("<img src="+c+"../", "<img src="+c+"../resources/");
+		ir1 = ir1.replace("<img src="+c+"../", "<img src="+c+"/final/resources/");
 		getBoardDto.setContent(ir1);
 		getBoardDto.setKind(0);
 		getBoardDto.setWriter((String)session.getAttribute("id"));
@@ -99,9 +99,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public String content(Model model, String boardNum, String pageNum) {
 		
+		boardDao.hitUp(Integer.parseInt(boardNum));
 		boardDto = boardDao.getBoard(Integer.parseInt(boardNum));
 		model.addAttribute("board", boardDto);
 		model.addAttribute("pageNum", pageNum);
+		
 		return "community/notice/content";
 	}
 	

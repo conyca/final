@@ -14,10 +14,10 @@
 					</c:if>
 					<c:if test="${empty sessionScope.id}">
 						<c:if test="${fn:length(param.returnUrl)>0 }">
-							<a href="loginForm.do?returnUrl="${param.returnUrl }>로그인</a>
+							<a href="/final/loginForm.do?returnUrl="${param.returnUrl }>로그인</a>
 						</c:if>
 						<c:if test="${(empty param.returnUrl) or (fn:length(param.returnUrl)==0) }">
-							<a href="loginForm.do?returnUrl="${returnUrl }>로그인</a>
+							<a href="/final/loginForm.do?returnUrl="${returnUrl }>로그인</a>
 						</c:if>
 					</c:if>
 					<c:if test="${sessionScope.category == 0}">
@@ -40,7 +40,7 @@
 							</c:when>
 						</c:choose>
 						
-						<div><a href = "cencel.do">대기 취소</a></div>
+						<div><a href = "/final/cencel.do">대기 취소</a></div>
 					</c:if>
 					
 					
@@ -138,30 +138,30 @@
 						<a href="">문의</a>
 					</div>
 					<div>
-						<a href="logout.do">로그아웃</a>
+						<a href="/final/logout.do">로그아웃</a>
 					</div>
 				</c:if>
 				<c:if test="${empty sessionScope.id  }">
 					<c:if test="${fn:length(param.returnUrl)>0 }">
 						<div>
-							<a href="joinForm.do?returnUrl=${param.returnUrl }">회원가입</a>
+							<a href="/final/joinForm.do?returnUrl=${param.returnUrl }">회원가입</a>
 						</div>
 						<div>
-							<a href="findIdForm.do?returnUrl=${param.returnUrl }">아이디 찾기</a>
+							<a href="/final/findIdForm.do?returnUrl=${param.returnUrl }">아이디 찾기</a>
 						</div>
 						<div>
-							<a href="findPassForm.do?returnUrl=${param.returnUrl }">비밀번호 찾기</a>
+							<a href="/final/findPassForm.do?returnUrl=${param.returnUrl }">비밀번호 찾기</a>
 						</div>
 					</c:if>
 					<c:if test="${(empty param.returnUrl) or (fn:length(param.returnUrl)==0) }">
 						<div>
-							<a href="joinForm.do?returnUrl=${returnUrl }">회원가입</a>
+							<a href="/final/joinForm.do?returnUrl=${returnUrl }">회원가입</a>
 						</div>
 						<div>
-							<a href="findIdForm.do?returnUrl=${returnUrl }">아이디 찾기</a>
+							<a href="/final/findIdForm.do?returnUrl=${returnUrl }">아이디 찾기</a>
 						</div>
 						<div>
-							<a href="findPassForm.do?returnUrl=${returnUrl }">비밀번호 찾기</a>
+							<a href="/final/findPassForm.do?returnUrl=${returnUrl }">비밀번호 찾기</a>
 						</div>
 					</c:if>
 				</c:if>

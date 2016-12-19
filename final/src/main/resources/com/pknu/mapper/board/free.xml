@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+              "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.pknu.pro.board.dao.FreeDao">
+	<select id="getBoardCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM board
+		WHERE kind = #{kind}
+	</select>
+	
+	<select id="getBoards" parameterType="hashMap" resultType="board">
+		SELECT *
+		FROM ( SELECT ROWNUM rm, board.* 
+				FROM (SELECT  b.*,
+							(select count(*) from comments where boardNum= b.boardNum ) as commentCount  
+          			  from board b
+						WHERE boardStatus = 0 
+						AND kind = #{kind}
+						START WITH GROUPID=0
+					  	CONNECT BY PRIOR boardNum=GROUPID
+					 	ORDER SIBLINGS BY boardNum desc) board
+				) 
+		WHERE rm BETWEEN #{startRow} and #{endRow}
+	</select>
+	
+	<select id="getBoardMaxNo" parameterType="int" resultType="integer">
+		SELECT MAX(boardNo) FROM board 
+		WHERE kind = #{kind}
+	</select>
+	
+	<insert id="write" parameterType="hashMap">
+		INSERT INTO board 
+		values (board_seq.nextval, #{board.kind}, #{writer}, 0, #{board.boardNo}, 
+				#{board.title}, #{board.content}, 0, 0, 0, sysdate, 0, 0)
+	</insert>
+	
+	<select id="getCurrentBoardNum" parameterType="hashMap" resultType="int">
+		SELECT boardNum FROM board
+		WHERE kind = #{kind} AND boardNo = #{boardNo}
+	</select>
+	
+	<select id="getMainBoards"  resultType="board">
+		select * from 
+			(select rownum rm, b.* from 
+				(select * from board 
+					where boardStatus = 0
+					and kind = 1 
+					order by boardNum desc
+					) b 
+				)
+			where rm between 1 and 4
+	</select>
+	
+	<select id="getBoard" parameterType="int" resultType="board">
+		SELECT * FROM board
+		WHERE boardNum =#{boardNum}
+	</select>
+	
+	<update id="hitUp" parameterType="int">
+		update board set hit = hit+1
+		where boardNum = #{boardNum}
+	</update>
+	
+</mapper>

@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 
 import com.pknu.pro.board.dto.BoardDto;
 
-public interface BoardService {
+public interface NoticeService {
 	public String list(String pageNum, Model model);
 	public String writeForm(Model model, String pageNum);
 	public void  file_uploader_html5 (HttpServletRequest request, HttpServletResponse response);

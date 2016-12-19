@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.pknu.pro.board.dao.BoardDao;
+import com.pknu.pro.board.dao.NoticeDao;
 import com.pknu.pro.board.dto.BoardDto;
 import com.pknu.pro.main.captcha.AudioCaptCha;
 import com.pknu.pro.main.dao.ClassDao;
@@ -57,14 +57,15 @@ public class MainServiceImpl implements MainService {
 	DataDto dataDto;
 	
 	@Autowired
-	BoardDao boardDao;
+	NoticeDao boardDao;
+	
 	
 	@Override
 	public String main(Model model) {
 		
 		// 공지사항 4개 담기
-		model.addAttribute("noticeList", boardDao.getMainBoards());
-		
+		model.addAttribute("noticeList", boardDao.getMainBoards(0));
+		model.addAttribute("freeList", boardDao.getMainBoards(1));
 		return "main/main";
 	}
 

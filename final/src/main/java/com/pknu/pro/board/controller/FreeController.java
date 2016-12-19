@@ -9,39 +9,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pknu.pro.board.dto.BoardDto;
-import com.pknu.pro.board.service.NoticeService;
+import com.pknu.pro.board.service.FreeService;
 
-@RequestMapping("/notice")
+
+@RequestMapping("/freeBoard")
 @Controller
-public class NoticeController {
-	
+public class FreeController {
+
 	@Autowired
-	NoticeService boardService;
-	
+	FreeService freeService;
 	
 	@RequestMapping("/list.do")
 	public String list(String pageNum, HttpServletRequest request, Model model){
-		return boardService.list(pageNum, model);
+		return freeService.list(pageNum,request,model);
 	}
 	
-	@RequestMapping("/writeForm.do")
+	@RequestMapping("writeForm.do")
 	public String writeForm(HttpSession session, HttpServletRequest request, Model model, String pageNum){
-		return boardService.writeForm(model, pageNum);
+		return freeService.writeForm(model, pageNum);
 	}
-	
 	@RequestMapping("/write.do")
 	public String write(HttpSession session, HttpServletRequest request, Model model, BoardDto boardDto, String ir1, String pageNum){
-		return boardService.write(session, boardDto, ir1, pageNum);
+		return freeService.write(session, boardDto, ir1, pageNum);
 	}
-	
 	@RequestMapping("/content.do")
 	public String content(HttpSession session, HttpServletRequest request, Model model,String boardNum ,String pageNum){
-		return boardService.content(model, boardNum, pageNum);
-	}
-	
-	@RequestMapping("/delete.do")
-	public String delete(){
-		System.out.println("¿Ô³ª?");
-		return "";
+		return freeService.content(model, boardNum, pageNum);
 	}
 }
