@@ -58,8 +58,6 @@
 						<c:if test="${sessionScope.category >= 8 }">
 							<option value= "0">[공지]</option>
 						</c:if>
-						<option value= "1">[자유]</option>
-						<option value= "2">[냉무]</option>
 					</select>
 				</div>
 				

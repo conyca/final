@@ -35,6 +35,9 @@
 			$("select").focus();
 			return false;
 		}
+		
+		
+		
 		return true;
 	}
 </script>
@@ -45,26 +48,48 @@
 	
 	<article> 
 		<div>
-			<div>공지사항</div>
-			<form action="write.do" method="post" name ="fr" onsubmit="return onSubmit();">
+			<div>자유게시판</div>
+			<form action="update.do" method="post" name ="fr" onsubmit="return onSubmit();">
 				<input type="hidden" name ="pageNum" value="${pageNum }">
+				<input type="hidden" name = "boardNum" value ="${boardNum }">
 				<div>
 					카테고리
 					<select name="category">
 						<option value="">선택</option>
-						<c:if test="${sessionScope.category >= 8 }">
-							<option value= "0">[공지]</option>
-						</c:if>
-						<option value= "1">[자유]</option>
-						<option value= "2">[냉무]</option>
+						<c:choose>
+							<c:when test="${board.category eq 0 }">
+								<c:if test="${sessionScope.category >= 8 }">
+									<option value= "0" selected="selected">[공지]</option>
+								</c:if>
+								<option value="1">[자유]</option>
+								<option value="2">[냉무]</option>
+							</c:when>
+							<c:when test="${board.category eq 1 }">
+								<c:if test="${sessionScope.category >= 8 }">
+									<option value= "0">[공지]</option>
+								</c:if>
+								<option value="1"  selected="selected">[자유]</option>
+								<option value="2">[냉무]</option>
+							</c:when>
+							<c:when test="${board.category eq 2 }">
+								<c:if test="${sessionScope.category >= 8 }">
+									<option value= "0" >[공지]</option>
+								</c:if>
+								<option value="1">[자유]</option>
+								<option value="2"  selected="selected">[냉무]</option>
+							</c:when>
+						
+						</c:choose>
+							
 					</select>
-				</div>
-				<div>
-					제목 <input type="text" name ="title" id = "title">
 				</div>
 				
 				<div>
-					<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;"></textarea>
+					제목 <input type="text" name ="title" id = "title" value="${board.title }">
+				</div>
+				<div>파일 <input type="button" value="파일업로드"></div>
+				<div>
+					<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;">${board.content }</textarea>
 					<script type="text/javascript">
 						var oEditors = [];
 						nhn.husky.EZCreator.createInIFrame({
@@ -74,8 +99,8 @@
 							fCreator : "createSEditor2"
 						});
 					</script>
-					<input type="submit" value="글쓰기">
-					<input type="button" value="취소" onclick="location.href='list.do?pageNum=${pageNum}'">
+					<input type="submit" value="수정">
+					<input type="button" value="취소" onclick="history.back();">
 				</div>
 				
 			</form>

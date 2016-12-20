@@ -46,8 +46,11 @@
 	<article> 
 		<div>
 			<div>공지사항</div>
-			<form action="write.do" method="post" name ="fr" onsubmit="return onSubmit();">
+			<form action="reply.do" method="post" name ="fr" onsubmit="return onSubmit();">
 				<input type="hidden" name ="pageNum" value="${pageNum }">
+				<input type="hidden" name="boardNum" value="${boardNum }">
+				<input type="hidden" name= "depth" value="${depth }">
+				<input type="hidden" name="groupId" value="${groupId }" >
 				<div>
 					카테고리
 					<select name="category">
@@ -64,7 +67,7 @@
 				</div>
 				
 				<div>
-					<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;"></textarea>
+					<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;">${originalString }</textarea>
 					<script type="text/javascript">
 						var oEditors = [];
 						nhn.husky.EZCreator.createInIFrame({

@@ -102,7 +102,81 @@ public class FreeServiceImpl implements FreeService {
 		model.addAttribute("board", boardDto);
 		model.addAttribute("pageNum", pageNum);
 		
-		return "community/notice/content";
+		return "community/free/content";
 	}
+	@Override
+	public String delete(Model model, String boardNum, String pageNum) {
+		freeDao.delete(Integer.parseInt(boardNum));
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("message", "삭제되었습니다.");
+		model.addAttribute("url", "list.do?pageNum="+pageNum);
+		return "etc/message";
+	}
+	@Override
+	public String updateForm(Model model, String boardNum, String pageNum) {
+		boardDto =  freeDao.getBoard(Integer.parseInt(boardNum));
+		model.addAttribute("board", boardDto);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("boardNum", boardNum);
+		return "community/free/update";
+	}
+	@Override
+	public String update(HttpSession session, Model model, BoardDto boardDto, String boardNum, String pageNum,
+			String ir1) {
+		char c = '"';
+		ir1 = ir1.replace("<img src="+c+"../", "<img src="+c+"/final/resources/");
+		Map<String, Object> hm = new HashMap<>();
+		hm.put("board", boardDto);
+		hm.put("content", ir1);
+		freeDao.update(hm);
+		return "redirect:content.do?pageNum="+pageNum+"&boardNum="+ boardNum;
+	}
+	@Override
+	public String replyForm(Model model, String boardNum, String pageNum) {
+		boardDto =  freeDao.getBoard(Integer.parseInt(boardNum));
+		String originalString ="";
+		originalString+="<p>===================</p>";
+		originalString+="<p>제목 : "+ boardDto.getTitle() +"</p>";
+		originalString+="<p>작성자 : "+ boardDto.getWriter() +"</p>";
+		originalString+="<p>내용 : </p>";
+		originalString+=boardDto.getContent();
+		originalString+="<p>===================</p>";
+		model.addAttribute("originalString", originalString);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("boardNum", boardNum);
+		return "community/free/reply";
+	}
+	@Override
+	public String reply(HttpSession session, Model model, BoardDto getBoardDto, String boardNum, String pageNum,
+			String ir1) {
+		char c = '"';
+		ir1 = ir1.replace("<img src="+c+"../", "<img src="+c+"/final/resources/");
+		getBoardDto.setContent(ir1);
+		getBoardDto.setKind(1);
+		getBoardDto.setWriter((String)session.getAttribute("id"));
+		int maxNo = 0;
+		
+		System.out.println(freeDao.getBoardMaxNo(getBoardDto.getKind()));
+		if(freeDao.getBoardMaxNo(getBoardDto.getKind()) == null ){
+			maxNo=1;
+		}else{
+			maxNo = freeDao.getBoardMaxNo(getBoardDto.getKind())+1;
+		}
+		Map<String, Object> hm = new HashMap<>();
+		hm.put("board", getBoardDto);
+		hm.put("writer", (String)session.getAttribute("id"));
+		getBoardDto.setBoardNo(maxNo);
+		
+		freeDao.reply(hm);
+		hm.put("boardNo", maxNo);
+		hm.put("kind", getBoardDto.getKind());
+		
+		int currentBoardNum = freeDao.getCurrentBoardNum(hm);
+		
+		return "redirect:content.do?pageNum="+pageNum+"&boardNum="+currentBoardNum;
+		
+	}
+	
+	
 	
 }

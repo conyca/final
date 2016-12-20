@@ -16,7 +16,7 @@
 <script type="text/javascript">
 	function onDelete(){
 		if(confirm("삭제하시겠습니까?")==true){
-			location.href = 'delete.do?pageNum=${pageNum}';
+			location.href = 'delete.do?pageNum=${pageNum}&boardNum=${board.boardNum}';
 		}
 	}
 </script>
@@ -28,14 +28,14 @@
 	<article>
 		<div>
 			<div>공지사항</div>
-			<div>제목 :  ${board.title }</div>
+			<div>제목 : <c:if test="${board.category eq 0 }">[공지]</c:if> ${board.title }</div>
 			<div>조회수 :  ${board.hit }</div>
 			<div>작성일 :  ${fn:substring(board.writeDate,0,10) }</div>
 			<div>${board.content }</div>
 		</div>
 		<div>
 			<c:if test="${sessionScope.category >= 8 }">
-				<input type ="button" value="수정">
+				<input type ="button" value="수정" onclick="location.href='updateForm.do?pageNum=${pageNum}&boardNum=${board.boardNum }'">
 				<input type ="button" value="삭제" onclick="onDelete();">
 			</c:if>
 			<input type="button" value ="목록" onclick="location.href='list.do?pageNum=${pageNum}'">

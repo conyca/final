@@ -40,8 +40,20 @@ public class NoticeController {
 	}
 	
 	@RequestMapping("/delete.do")
-	public String delete(){
-		System.out.println("¿Ô³ª?");
-		return "";
+	public String delete(HttpSession session, HttpServletRequest request, Model model,String boardNum ,String pageNum){
+		return boardService.delete(model, boardNum, pageNum);
 	}
+	
+	@RequestMapping("/updateForm.do")
+	public String updateForm(HttpSession session, HttpServletRequest request, Model model,String boardNum ,String pageNum){
+
+		return boardService.updateForm(model, boardNum, pageNum);
+	}
+	
+	@RequestMapping("/update.do")
+	public String update(HttpSession session, HttpServletRequest request, Model model, BoardDto boardDto, String boardNum , String pageNum, String ir1){
+		return boardService.update(session, model, boardDto, boardNum, pageNum, ir1);
+	}
+	
 }
+	

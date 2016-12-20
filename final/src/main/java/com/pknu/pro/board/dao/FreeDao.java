@@ -14,4 +14,7 @@ public interface FreeDao {
 	public void hitUp(int boardNum);
 	public BoardDto getBoard(int BoardNum);
 	public List<BoardDto> getMainBoards();
+	public void delete(int boardNum);
+	public void update(Map<String, Object> hm);
+	public int reply(Map<String, Object> hm);
 }

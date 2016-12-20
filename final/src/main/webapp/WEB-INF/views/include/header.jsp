@@ -141,7 +141,7 @@ window.onresize = winsdowSize;
 					<li><a>${sessionScope.name }</a></li>
 					<li><a href="/final/myPage.do">마이페이지</a></li>
 					<li><a>고객센터</a></li>
-					<li><a href="logout.do">로그아웃</a></li>
+					<li><a href="/final/logout.do">로그아웃</a></li>
 				</c:when>
 				<c:otherwise>
 					<c:if test="${fn:length(param.returnUrl)>0 }">

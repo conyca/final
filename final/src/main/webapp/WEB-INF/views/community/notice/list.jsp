@@ -38,7 +38,7 @@
 					<c:forEach items="${list }" var="item">
 						<div>
 							<span>${item.boardNo }</span>
-							<span><a href ="content.do?pageNum=${pageNum }&boardNum=${item.boardNum}">${item.title }</a></span>
+							<span><a href ="content.do?pageNum=${pageNum }&boardNum=${item.boardNum}"><c:if test="${board.category eq 0 }">[공지]</c:if>${item.title }</a></span>
 							<span>${item.writer }</span>
 							<span>${fn:substring(item.writeDate,0,10)}</span>
 							<span>${item.hit }</span>

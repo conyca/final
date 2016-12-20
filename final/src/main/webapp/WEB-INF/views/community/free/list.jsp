@@ -21,7 +21,7 @@
 		<div>
 			<div>자유게시판</div>
 			<div>
-				<c:if test="${sessionScope.category >=1 }">
+				<c:if test="${sessionScope.category >=0 }">
 					<a href ="writeForm.do?pageNum=${pageNum }">글쓰기</a>
 				</c:if>
 			</div>

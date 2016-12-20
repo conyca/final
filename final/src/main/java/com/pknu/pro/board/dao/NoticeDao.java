@@ -14,4 +14,6 @@ public interface NoticeDao {
 	public int getCurrentBoardNum(Map<String, Object> hm);
 	public List<BoardDto> getMainBoards(int kind);
 	public void hitUp(int boardNum);
+	public void delete(int boardNum);
+	public void update(Map<String, Object> hm);
 }

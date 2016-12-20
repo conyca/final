@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=yes">
 <!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 <title>행복하니? 행복학원!</title>
-<link rel="stylesheet" href="/final/resources/css/board/notice/notice.css">  
+<link rel="stylesheet" href="../resources/css/board/notice/notice.css">  
 <script src="/final/resources/js/jquery/jquery-3.1.1.min.js"></script> 
 <script type="text/javascript" src="/final/resources/se2/js/HuskyEZCreator.js" charset="utf8"></script> 
 <script type="text/javascript">
@@ -35,6 +35,9 @@
 			$("select").focus();
 			return false;
 		}
+		
+		
+		
 		return true;
 	}
 </script>
@@ -46,25 +49,25 @@
 	<article> 
 		<div>
 			<div>공지사항</div>
-			<form action="write.do" method="post" name ="fr" onsubmit="return onSubmit();">
+			<form action="update.do" method="post" name ="fr" onsubmit="return onSubmit();">
 				<input type="hidden" name ="pageNum" value="${pageNum }">
+				<input type="hidden" name = "boardNum" value ="${boardNum }">
 				<div>
 					카테고리
 					<select name="category">
 						<option value="">선택</option>
 						<c:if test="${sessionScope.category >= 8 }">
-							<option value= "0">[공지]</option>
+							<option value= "0" selected="selected">[공지]</option>
 						</c:if>
-						<option value= "1">[자유]</option>
-						<option value= "2">[냉무]</option>
 					</select>
-				</div>
-				<div>
-					제목 <input type="text" name ="title" id = "title">
 				</div>
 				
 				<div>
-					<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;"></textarea>
+					제목 <input type="text" name ="title" id = "title" value="${board.title }">
+				</div>
+				<div>파일 <input type="button" value="파일업로드"></div>
+				<div>
+					<textarea name="ir1" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;">${board.content }</textarea>
 					<script type="text/javascript">
 						var oEditors = [];
 						nhn.husky.EZCreator.createInIFrame({
@@ -74,8 +77,8 @@
 							fCreator : "createSEditor2"
 						});
 					</script>
-					<input type="submit" value="글쓰기">
-					<input type="button" value="취소" onclick="location.href='list.do?pageNum=${pageNum}'">
+					<input type="submit" value="수정">
+					<input type="button" value="취소" onclick="history.back();">
 				</div>
 				
 			</form>

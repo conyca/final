@@ -22,8 +22,8 @@
 	</select>
 	
 	<insert id="join" parameterType="member">
-		INSERT INTO member 
-		VALUES ( MEM_SEQ.NEXTVAL, #{id}, #{pass}, #{name}, #{sex}, #{birthday},#{email}, #{mobno},
+		INSERT INTO member  
+		VALUES (  #{id}, #{pass}, #{name}, #{sex}, #{birthday},#{email}, #{mobno},
 		#{status},#{category}, sysdate, null, null)
 	</insert>
 	

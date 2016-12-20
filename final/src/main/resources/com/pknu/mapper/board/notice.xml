@@ -60,4 +60,14 @@
 		where boardNum = #{boardNum}
 	</update>
 	
+	<update id="delete" parameterType="int">
+		update board set boardStatus = 1
+		where boardNum = #{boardNum}
+	</update>
+	
+	<update id="update" parameterType="hashMap">
+		update board set title = #{board.title}, category=#{board.category}, content = #{content}
+		where boardNum = #{board.boardNum}
+	</update>
+	
 </mapper>

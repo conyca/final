@@ -30,7 +30,7 @@
 	
 	<insert id="write" parameterType="hashMap">
 		INSERT INTO board 
-		values (board_seq.nextval, #{board.kind}, #{writer}, 0, #{board.boardNo}, 
+		values (board_seq.nextval, #{board.kind}, #{writer}, #{board.category}, #{board.boardNo}, 
 				#{board.title}, #{board.content}, 0, 0, 0, sysdate, 0, 0)
 	</insert>
 	
@@ -60,5 +60,23 @@
 		update board set hit = hit+1
 		where boardNum = #{boardNum}
 	</update>
+	
+	<update id="delete" parameterType="int">
+		update board set boardStatus = 1 
+		where boardNum = #{boardNum}
+	</update>
+	
+	<update id="update" parameterType="hashMap">
+		update board set title = #{board.title}, category=#{board.category}, content = #{content}
+		where boardNum = #{board.boardNum}
+	</update>
+	
+	<insert id="reply" parameterType="hashMap">
+		INSERT INTO board 
+		values (board_seq.nextval, #{board.kind}, #{writer}, #{board.category}, #{board.boardNo}, 
+				#{board.title}, #{board.content}, 0, 0, 0, sysdate, 0, 0)
+	</insert>
+	
+	
 	
 </mapper>

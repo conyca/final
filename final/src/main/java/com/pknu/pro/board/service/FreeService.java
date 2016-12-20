@@ -15,4 +15,9 @@ public interface FreeService {
 	public void  file_uploader_html5 (HttpServletRequest request, HttpServletResponse response);
 	public String write(HttpSession session, BoardDto boardDto, String ir1, String pageNum);
 	public String content(Model model, String boardNum, String pageNum);
+	public String delete(Model model, String boardNum, String pageNum);
+	public String updateForm(Model model, String boardNum, String pageNum);
+	public String update(HttpSession session, Model model, BoardDto boardDto, String boardNum, String pageNum, String ir1);
+	public String replyForm(Model model, String boardNum, String pageNum);
+	public String reply(HttpSession session, Model model, BoardDto boardDto, String boardNum, String pageNum, String ir1);
 }

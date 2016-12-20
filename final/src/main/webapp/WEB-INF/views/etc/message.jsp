@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="./resources/js/jquery/jquery-3.1.1.min.js"></script>
+<script src="/final/resources/js/jquery/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		var message = '${message}';

@@ -106,6 +106,35 @@ public class NoticeServiceImpl implements NoticeService {
 		
 		return "community/notice/content";
 	}
+
+	@Override
+	public String delete(Model model, String boardNum, String pageNum) {
+		boardDao.delete(Integer.parseInt(boardNum));
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("message", "삭제되었습니다.");
+		model.addAttribute("url", "list.do?pageNum="+pageNum);
+		return "etc/message";
+	}
+
+	@Override
+	public String updateForm(Model model, String boardNum, String pageNum) {
+		boardDto =  boardDao.getBoard(Integer.parseInt(boardNum));
+		model.addAttribute("board", boardDto);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("boardNum", boardNum);
+		return "community/notice/update";
+	}
+
+	@Override
+	public String update(HttpSession session, Model model, BoardDto boardDto, String boardNum, String pageNum, String ir1) {
+		char c = '"';
+		ir1 = ir1.replace("<img src="+c+"../", "<img src="+c+"/final/resources/");
+		Map<String, Object> hm = new HashMap<>();
+		hm.put("board", boardDto);
+		hm.put("content", ir1);
+		boardDao.update(hm);
+		return "redirect:content.do?pageNum="+pageNum+"&boardNum="+ boardNum;
+	}
 	
 	
 	
