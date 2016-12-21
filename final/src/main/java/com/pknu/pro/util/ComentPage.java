@@ -3,7 +3,7 @@ package com.pknu.pro.util;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Page {	
+public class ComentPage {	
 	private int startRow, endRow;
 	private StringBuffer sb;	
 	
@@ -24,7 +24,7 @@ public class Page {
 			sb.append("<img src='/final/resources/img/board/btn/board_left.png' width='30' height='9'>");			
 		} else {
 			sb.append("<img src='/final/resources/img/board/btn/board_left.png' width='30' height='9'");
-			sb.append(" onclick='location.href=\""+url+"?pageNum=");
+			sb.append(" onclick='location.href=\""+url+"&comentPageNum=");
 			sb.append(startPage - pageBlock);
 			sb.append("\"' style='cursor:pointer'> ");
 		}

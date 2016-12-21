@@ -77,7 +77,7 @@
 				<c:if test="${!empty freeList }">
 					<c:forEach items="${freeList }" var="fList">
 						<tr>
-							<th><a href="/final/freeBoard/content.do?pageNum=1&boardNum=${fList.boardNum }">${fList.title }</a></th>
+							<td><a href="/final/freeBoard/content.do?pageNum=1&boardNum=${fList.boardNum }">${fList.title }</a></td>
 							<td>${fn:substring(fList.writeDate,0,10) }</td>
 						</tr>
 					</c:forEach>

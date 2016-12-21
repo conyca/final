@@ -56,7 +56,10 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	
-	
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="commentDao">
+	  <property name="mapperInterface" value="com.pknu.pro.board.dao.CommentDao" />		
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 	
 	
 </beans>

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.pknu.pro.board.dao.CommentDao;
 import com.pknu.pro.board.dao.FreeDao;
 import com.pknu.pro.board.dto.BoardDto;
 import com.pknu.pro.board.util.FileUploaderHtml5;
@@ -28,6 +29,9 @@ public class FreeServiceImpl implements FreeService {
 	
 	@Autowired
 	FileUploaderHtml5 fileUploaderHtml5;
+	
+	@Autowired
+	CommentDao commentDao;
 	
 	
 	List<BoardDto> boardList;
@@ -95,10 +99,30 @@ public class FreeServiceImpl implements FreeService {
 	}
 	
 	@Override
-	public String content(Model model, String boardNum, String pageNum) {
+	public String content(Model model, String boardNum, String pageNum, String commentPageNum) {
 		
 		freeDao.hitUp(Integer.parseInt(boardNum));
 		boardDto = freeDao.getBoard(Integer.parseInt(boardNum));
+		
+		if(commentPageNum == null || commentPageNum.equals("")){
+			commentPageNum = "1";
+		}
+		int totalCount=0;		
+		int pageSize=10;
+	    int pageBlock=10;
+	    totalCount = commentDao.getCommentCount(Integer.parseInt(boardNum));
+	    page.paging(Integer.parseInt(pageNum),totalCount,pageSize, pageBlock,"content.do");
+	    Map<String, Object> hm = new HashMap<>();
+	    hm.put("startRow", page.getStartRow());
+	    hm.put("endRow", page.getEndRow());
+		
+		
+		
+		
+		
+		
+		
+		
 		model.addAttribute("board", boardDto);
 		model.addAttribute("pageNum", pageNum);
 		
@@ -132,7 +156,7 @@ public class FreeServiceImpl implements FreeService {
 		return "redirect:content.do?pageNum="+pageNum+"&boardNum="+ boardNum;
 	}
 	@Override
-	public String replyForm(Model model, String boardNum, String pageNum) {
+	public String replyForm(Model model, String boardNum, String pageNum, BoardDto getBoardDto) {
 		boardDto =  freeDao.getBoard(Integer.parseInt(boardNum));
 		String originalString ="";
 		originalString+="<p>===================</p>";
@@ -144,6 +168,8 @@ public class FreeServiceImpl implements FreeService {
 		model.addAttribute("originalString", originalString);
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("boardNum", boardNum);
+		model.addAttribute("depth", getBoardDto.getDepth());
+		model.addAttribute("groupId", getBoardDto.getGroupId());
 		return "community/free/reply";
 	}
 	@Override

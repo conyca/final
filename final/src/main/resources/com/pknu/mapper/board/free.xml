@@ -74,7 +74,7 @@
 	<insert id="reply" parameterType="hashMap">
 		INSERT INTO board 
 		values (board_seq.nextval, #{board.kind}, #{writer}, #{board.category}, #{board.boardNo}, 
-				#{board.title}, #{board.content}, 0, 0, 0, sysdate, 0, 0)
+				#{board.title}, #{board.content}, #{board.depth}+1, 0, #{board.groupId}, sysdate, 0, 0)
 	</insert>
 	
 	

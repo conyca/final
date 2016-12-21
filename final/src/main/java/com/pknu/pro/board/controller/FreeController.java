@@ -35,8 +35,8 @@ public class FreeController {
 	}
 	
 	@RequestMapping("/content.do")
-	public String content(HttpSession session, HttpServletRequest request, Model model,String boardNum ,String pageNum){
-		return freeService.content(model, boardNum, pageNum);
+	public String content(HttpSession session, HttpServletRequest request, Model model,String boardNum ,String pageNum, String commentPageNum){
+		return freeService.content(model, boardNum, pageNum, commentPageNum);
 	}
 	
 	@RequestMapping("/delete.do")
@@ -55,8 +55,8 @@ public class FreeController {
 	}
 	
 	@RequestMapping("/replyForm.do")
-	public String replyForm(HttpSession session, HttpServletRequest request, Model model,String boardNum ,String pageNum){
-		return freeService.replyForm(model, boardNum, pageNum);
+	public String replyForm(HttpSession session, HttpServletRequest request, Model model,String boardNum ,String pageNum, BoardDto boardDto){
+		return freeService.replyForm(model, boardNum, pageNum, boardDto);
 	}
 	
 	@RequestMapping("/reply.do")
