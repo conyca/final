@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.pknu.pro.board.dao.GalleryDao;
 import com.pknu.pro.board.dto.BoardDto;
@@ -41,10 +42,26 @@ public class GalleryServiceImpl implements GalleryService {
 	    hm.put("endRow", page.getEndRow());
 	    hm.put("kind", 2);
 	    boardList=galleryDao.getBoards(hm);
+	    model.addAttribute("list", boardList);
+		model.addAttribute("pageCode", page.getSb().toString());
+		model.addAttribute("pageNum", pageNum);
 	    
-	    
+		return "community/gallery/list";
+	}
+
+	@Override
+	public String writeForm(Model model, String pageNum) {
+		model.addAttribute("pageNum", pageNum);
+		return "community/gallery/write";
+	}
+
+	@Override
+	public String write(Model model, String pageNum, BoardDto boardDto, MultipartHttpServletRequest mRequest) {
+		
+		// return "redirect:content.do?pageNum="+pageNum+"&boardNum="+boardNum;
 		return null;
 	}
+	
 	
 	
 }

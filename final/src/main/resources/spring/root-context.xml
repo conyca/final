@@ -37,7 +37,7 @@
 	
 	<bean id="saveDir" class="java.lang.String">
 		<constructor-arg value="d:\upload\" />		
-<!-- 		<constructor-arg value="/home/pknu6/upload/" />		 -->
+<!-- 		<constructor-arg value="/home/pknu6/finalUpload/" />		 -->
 	</bean> 	
 	
 	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="memberDao">
