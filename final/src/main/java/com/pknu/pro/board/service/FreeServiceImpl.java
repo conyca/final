@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,7 +16,9 @@ import org.springframework.ui.Model;
 import com.pknu.pro.board.dao.CommentDao;
 import com.pknu.pro.board.dao.FreeDao;
 import com.pknu.pro.board.dto.BoardDto;
+import com.pknu.pro.board.dto.CommentDto;
 import com.pknu.pro.board.util.FileUploaderHtml5;
+import com.pknu.pro.util.CommentPage;
 import com.pknu.pro.util.Page;
 
 @Service
@@ -28,11 +31,16 @@ public class FreeServiceImpl implements FreeService {
 	Page page;
 	
 	@Autowired
+	CommentPage commentPage;
+	
+	@Autowired
 	FileUploaderHtml5 fileUploaderHtml5;
 	
 	@Autowired
 	CommentDao commentDao;
 	
+	CommentDto commentDto;
+	List<CommentDto> commentList;
 	
 	List<BoardDto> boardList;
 	BoardDto boardDto;
@@ -111,18 +119,16 @@ public class FreeServiceImpl implements FreeService {
 		int pageSize=10;
 	    int pageBlock=10;
 	    totalCount = commentDao.getCommentCount(Integer.parseInt(boardNum));
-	    page.paging(Integer.parseInt(pageNum),totalCount,pageSize, pageBlock,"content.do");
+	    commentPage.paging(Integer.parseInt(pageNum),totalCount,pageSize, pageBlock,"content.do?pageNum="+pageNum+"&boardNum="+boardNum);
 	    Map<String, Object> hm = new HashMap<>();
-	    hm.put("startRow", page.getStartRow());
-	    hm.put("endRow", page.getEndRow());
+	    hm.put("boardNum", Integer.parseInt(boardNum));
+	    hm.put("startRow", commentPage.getStartRow());
+	    hm.put("endRow", commentPage.getEndRow());
+	    commentList =  commentDao.getCommentList(hm);
 		
-		
-		
-		
-		
-		
-		
-		
+		model.addAttribute("comment", commentList);
+		model.addAttribute("commentPage", commentPage.getSb().toString());
+		model.addAttribute("commentPageNum", commentPageNum);
 		model.addAttribute("board", boardDto);
 		model.addAttribute("pageNum", pageNum);
 		

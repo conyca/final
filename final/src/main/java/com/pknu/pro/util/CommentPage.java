@@ -3,7 +3,7 @@ package com.pknu.pro.util;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ComentPage {	
+public class CommentPage {	
 	private int startRow, endRow;
 	private StringBuffer sb;	
 	
@@ -21,7 +21,7 @@ public class ComentPage {
 
 		sb = new StringBuffer();
 		if(startPage < pageBlock) {
-			sb.append("<img src='/final/resources/img/board/btn/board_left.png' width='30' height='9'>");			
+//			sb.append("<img src='/final/resources/img/board/btn/board_left.png' width='30' height='9'>");			
 		} else {
 			sb.append("<img src='/final/resources/img/board/btn/board_left.png' width='30' height='9'");
 			sb.append(" onclick='location.href=\""+url+"&comentPageNum=");
@@ -36,7 +36,7 @@ public class ComentPage {
 				sb.append(i);
 				sb.append("</font></b>");
 			} else {
-				sb.append("&nbsp;&nbsp;<a href='"+url+"?pageNum=");
+				sb.append("&nbsp;&nbsp;<a href='"+url+"&comentPageNum=");
 				sb.append(i);
 				sb.append("'>");
 				sb.append(i);
@@ -47,11 +47,11 @@ public class ComentPage {
 		sb.append("&nbsp;&nbsp;|");		
 		if(endPage < totalPage) {
 			sb.append("<img src='/final/resources/img/board/btn/board_right.png' width='30' height='9'");
-			sb.append(" onclick='location.href=\""+url+"?pageNum=");
+			sb.append(" onclick='location.href=\""+url+"&comentPageNum=");
 			sb.append(startPage + pageBlock);
 			sb.append("\"' style='cursor:pointer'> ");						
 		} else {
-			sb.append("<img src='/final/resources/img/board/btn/board_right.png' width='30' height='9'>");
+//			sb.append("<img src='/final/resources/img/board/btn/board_right.png' width='30' height='9'>");
 			
 		}		
 	}

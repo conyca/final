@@ -12,4 +12,25 @@
 		where boardNum = #{boardNum}
 	</select>
 	
+	<select id="getCommentList" parameterType="hashMap" resultType="comment">
+		select *
+		from (select rownum rm, c.* 
+				from (select * from comments 
+						where boardNum = #{boardNum}
+						order by commentNum desc
+					) c
+			)
+		where rm between #{startRow} and #{endRow}
+	</select>
+	
+	<update id="commentUpdate" parameterType="comment">
+		update comments set content = #{content} 
+		where commentNum = #{commentNum}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from comments
+		where commentNum = #{commentNum}
+	</delete>
+	
 </mapper>

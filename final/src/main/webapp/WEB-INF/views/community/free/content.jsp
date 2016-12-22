@@ -33,6 +33,19 @@
 		}
 	}
 	
+	function commentUpdate(i){
+		var text = $("#comment"+i).text();
+		var str = '<textarea rows="" cols="" id="cont'+i+'">'+text+'</textarea>'
+		$("#comment"+i).html(str);
+		$("#commentUpdate"+i).html('<a href ="javaScript:commentComplete('+i+')">[완료]</a>');
+	}
+	
+	function commentComplete(i){
+		document.cufr.commentNum.value = i;
+		document.cufr.content.value = $("#cont"+i).val();
+		document.cufr.submit();
+		
+	}
 	
 </script>
 </head> 
@@ -45,6 +58,15 @@
 			<input type ="hidden" name="kind" value="${board.kind }">
 			<input type ="hidden" name="boardNum" value="${board.boardNum }">
 			<input type ="hidden" name="pageNum" value="${pageNum }">
+			<input type ="hidden" name="commentPageNum" value="${commentPageNum }">
+			<input type ="hidden" name="content" value="" >
+		</form>
+		<form action="/final/comment/commentUpdate.do" method="post" name="cufr">
+			<input type ="hidden" name="kind" value="${board.kind }">
+			<input type="hidden" name="boardNum" value="${board.boardNum }">
+			<input type ="hidden" name="pageNum" value="${pageNum }">
+			<input type ="hidden" name="commentPageNum" value="${commentPageNum }">
+			<input type ="hidden" name="commentNum" value="">
 			<input type ="hidden" name="content" value="" >
 		</form>
 		<form action="replyForm.do" method="post" name="fr">
@@ -64,7 +86,23 @@
 		</form>
 		<div>
 			<!-- 댓글 목록 -->
-			
+			<c:if test="${!empty comment }">
+				<div>
+					<span>댓글(${fn:length(comment) })</span>
+				</div>
+				<c:forEach items="${comment }" var="cList">
+					<div>
+						<span>${cList.id }</span>
+						<span>${fn:substring(cList.commentDate,0,10) }</span>
+						<span id="comment${cList.commentNum }">${cList.content }</span>
+						<c:if test="${sessionScope.id eq cList.id }">
+							<span id="commentUpdate${cList.commentNum }"><a href ="javaScript:commentUpdate(${cList.commentNum });">[수정]</a></span>
+							<span><a href="/final/comment/delete.do?pageNum=${pageNum}&boardNum=${board.boardNum}&commentPageNum=${commentPageNum}&kind=${board.kind}&commentNum=${cList.commentNum}">[삭제]</a></span>
+						</c:if>
+					</div>
+				</c:forEach>
+				<div>${commentPage }</div>
+			</c:if>
 		</div>
 			
 		<div>

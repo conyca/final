@@ -14,8 +14,8 @@ public class ReturnUrl {
 				returnUrl = returnUrl.substring(returnUrl.indexOf("=")+1);
 			}
 		}else{
-//			returnUrl = request.getHeader("referer");
-			returnUrl = "main.do";
+			returnUrl = request.getHeader("referer");
+//			returnUrl = "main.do";
 		}
 		
 		return returnUrl;

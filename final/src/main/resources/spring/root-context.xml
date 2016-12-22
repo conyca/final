@@ -37,6 +37,7 @@
 	
 	<bean id="saveDir" class="java.lang.String">
 		<constructor-arg value="d:\upload\" />		
+<!-- 		<constructor-arg value="/home/pknu6/upload/" />		 -->
 	</bean> 	
 	
 	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="memberDao">
@@ -61,5 +62,9 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	
+	<bean class="org.mybatis.spring.mapper.MapperFactoryBean" id="galleryDao">
+	  <property name="mapperInterface" value="com.pknu.pro.board.dao.GalleryDao" />		
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
 	
 </beans>

@@ -165,7 +165,7 @@ create sequence inqu_seq
   
 drop table comments;
 create table comments(
-  commnetNum number primary key,
+  commentNum number primary key,
   id varchar2(20) not null,
   content clob not null,
   commentDate date not null,
