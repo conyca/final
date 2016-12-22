@@ -1,4 +1,4 @@
-package com.pknu.pro.util;
+package com.pknu.pro.board.util;
 
 import java.util.List;
 
