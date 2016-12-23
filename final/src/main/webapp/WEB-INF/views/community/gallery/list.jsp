@@ -16,7 +16,7 @@
 <body>
 	
 	<%@ include file="../../include/header.jsp" %>
-	
+
 	<article>
 		<div>
 			<div>겔러리</div>
@@ -41,7 +41,7 @@
 								<li>
 									<span>${item.boardNo }</span>
 									<a href ="content.do?pageNum=${pageNum }&boardNum=${item.boardNum}">
-										<img>
+										<img src="displayFile.do?fileName=${item.fileName }">
 									</a>
 									
 									<span>

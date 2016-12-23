@@ -53,7 +53,7 @@
 	
 	<select id="getBoard" parameterType="int" resultType="board">
 		SELECT * FROM board
-		WHERE boardNum =#{boardNum}
+		WHERE boardNum =#{boardNum} and kind = 1;
 	</select>
 	
 	<update id="hitUp" parameterType="int">

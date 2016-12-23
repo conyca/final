@@ -31,12 +31,18 @@
 <!-- 			<beans:bean class="com.pknu.pro.main.interceptor.CancelInterceptor"></beans:bean> -->
 <!-- 		</interceptor> -->
 	</interceptors>
-
+	
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >
+		<beans:property value="100000000" name="maxUploadSize"/>
+	</beans:bean>	
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
+	
 	
 	<beans:bean id="JSON" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
 	

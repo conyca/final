@@ -13,7 +13,8 @@
 		SELECT *
 		FROM ( SELECT ROWNUM rm, board.* 
 				FROM (SELECT  b.*,
-							(select count(*) from comments where boardNum= b.boardNum ) as commentCount  
+							(select count(*) from comments where boardNum= b.boardNum ) as commentCount,
+							(select storedFname from fileList where boardNum=b.boardNum and rowNum between 1 and 1) as fileName 
           			  from board b
 						WHERE boardStatus = 0 
 						AND kind = #{kind}
@@ -24,21 +25,42 @@
 		WHERE rm BETWEEN #{startRow} and #{endRow}
 	</select>
 	
+	<select id="getNextBoardNum" resultType="int">
+		select board_seq.nextval from dual
+	</select>
+	
+	<select id="getCurrentBoardNum" resultType="int">
+		select board_seq.currval from dual
+	</select>
+	
 	<select id="getBoardMaxNo" parameterType="int" resultType="integer">
 		SELECT MAX(boardNo) FROM board 
 		WHERE kind = #{kind}
 	</select>
 	
-	<insert id="write" parameterType="hashMap">
+	<insert id="write" parameterType="board">
 		INSERT INTO board 
-		values (board_seq.nextval, #{board.kind}, #{writer}, #{board.category}, #{board.boardNo}, 
-				#{board.title}, #{board.content}, 0, 0, 0, sysdate, 0, 0)
+		values (
+		<if test="boardNum==0">
+			board_seq.nextval,
+		</if>
+		<if test="boardNum!=0">
+			#{boardNum},
+		</if>
+		#{kind}, #{writer}, #{category}, #{boardNo}, 
+				#{title}, #{content}, 0, 0, 0, sysdate, #{fileStatus}, 0)
 	</insert>
 	
-	<select id="getCurrentBoardNum" parameterType="hashMap" resultType="int">
-		SELECT boardNum FROM board
-		WHERE kind = #{kind} AND boardNo = #{boardNo}
-	</select>
+<!-- 	<select id="getCurrentBoardNum" parameterType="hashMap" resultType="int"> -->
+<!-- 		SELECT boardNum FROM board -->
+<!-- 		WHERE kind = #{kind} AND boardNo = #{boardNo} -->
+<!-- 	</select> -->
+	
+	<insert id="insertFile" parameterType="file">
+			INSERT INTO FILELIST 	
+			values(#{storedFname}
+			,#{fileLength},#{boardNum})			
+	</insert>
 	
 	<select id="getMainBoards"  resultType="board">
 		select * from 
@@ -52,9 +74,14 @@
 			where rm between 1 and 4
 	</select>
 	
-	<select id="getBoard" parameterType="int" resultType="board">
+	<select id="getBoard" parameterType="hashMap" resultType="board">
 		SELECT * FROM board
-		WHERE boardNum =#{boardNum}
+		WHERE boardNum =#{boardNum} and kind = #{kind}
+	</select>
+	
+	<select id="getFileList" parameterType="int" resultType="file">
+		select * from fileList
+		where boardNum = #{boardNum}
 	</select>
 	
 	<update id="hitUp" parameterType="int">

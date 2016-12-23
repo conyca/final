@@ -18,7 +18,14 @@ public class BoardDto {
 	private int boardStatus;
 	private int commentCount;
 	private List<String> fileNames;
+	private String fileName;
 	
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	public int getBoardNum() {
 		return boardNum;
 	}
@@ -114,8 +121,10 @@ public class BoardDto {
 		return "BoardDto [boardNum=" + boardNum + ", kind=" + kind + ", writer=" + writer + ", category=" + category
 				+ ", boardNo=" + boardNo + ", title=" + title + ", content=" + content + ", depth=" + depth + ", hit="
 				+ hit + ", groupId=" + groupId + ", writeDate=" + writeDate + ", fileStatus=" + fileStatus
-				+ ", boardStatus=" + boardStatus + ", commentCount=" + commentCount + ", fileNames=" + fileNames + "]";
+				+ ", boardStatus=" + boardStatus + ", commentCount=" + commentCount + ", fileNames=" + fileNames
+				+ ", fileName=" + fileName + "]";
 	}
+
 	
 	
 	

@@ -41,7 +41,7 @@
 </head> 
 <body>
 	
-	<%@ include file="../../include/childHeader.jsp" %>
+	<%@ include file="../../include/header.jsp" %>
 	
 	<article> 
 		<div>
@@ -86,6 +86,6 @@
 		</div>
 	</article>
 	
-	<%@ include file="../../include/childFooter.jsp"  %>
+	<%@ include file="../../include/footer.jsp"  %>
 </body>
 </html>

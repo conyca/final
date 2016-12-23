@@ -23,6 +23,7 @@
 		<typeAlias alias="inqu" type="com.pknu.pro.main.dto.InquiryDto"/>
 		<typeAlias alias="board" type="com.pknu.pro.board.dto.BoardDto"/>
 		<typeAlias alias="comment" type="com.pknu.pro.board.dto.CommentDto"/>
+		<typeAlias alias="file" type="com.pknu.pro.board.dto.FileDto"/>
 	</typeAliases>
 	
 <!-- 	<mappers> -->
