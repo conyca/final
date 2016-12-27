@@ -105,6 +105,4 @@
 				#{board.title}, #{board.content}, #{board.depth}+1, 0, #{board.groupId}, sysdate, 0, 0)
 	</insert>
 	
-	
-	
 </mapper>

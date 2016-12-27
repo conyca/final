@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.pknu.pro.board.dto.BoardDto;
+import com.pknu.pro.board.dto.UpdateDto;
 import com.pknu.pro.board.service.GalleryService;
 
 @RequestMapping("/gallery")
@@ -45,8 +46,24 @@ public class GalleryController {
 	}
 	
 	@RequestMapping("/content.do")
-	public String content(HttpSession session, Model model, String pageNum, String boardNum){
+	public String content(HttpSession session, HttpServletRequest request, Model model, String pageNum, String boardNum){
 		return galleryService.content(model, pageNum, boardNum);
+	}
+	
+	@RequestMapping("/delete.do")
+	public String delete(HttpSession session, HttpServletRequest request, Model model, String pageNum, String boardNum){
+		return galleryService.delete(model,pageNum,boardNum);
+	}
+	
+	@RequestMapping("/updateForm.do")
+	public String updateForm(HttpSession session, HttpServletRequest request, Model model, String pageNum, String boardNum){
+		return galleryService.updateForm(model,pageNum,boardNum);
+	}
+	
+	@RequestMapping("/update.do")
+	public String update(HttpSession session, Model model, BoardDto boardDto, String ir1, 
+			String pageNum, MultipartHttpServletRequest mRequest, UpdateDto updateDto){
+		return galleryService.update(session, model, pageNum, boardDto, mRequest,ir1, updateDto);
 	}
 	
 }

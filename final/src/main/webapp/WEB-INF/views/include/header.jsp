@@ -223,7 +223,7 @@ window.onresize = winsdowSize;
 			<ul>
 				<li><a href="/final/notice/list.do">공지사항</a></li>
 				<li><a href="/final/freeBoard/list.do">자유게시판</a></li>
-				<li><a href="">겔러리</a></li>
+				<li><a href="/final/gallery/list.do">겔러리</a></li>
 				<li><a href="">자료실</a></li>
 			</ul>
 		</div>

@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.pknu.pro.board.dao.GalleryDao;
 import com.pknu.pro.board.dto.BoardDto;
 import com.pknu.pro.board.dto.FileDto;
+import com.pknu.pro.board.dto.UpdateDto;
 import com.pknu.pro.board.util.MediaUtils;
 import com.pknu.pro.board.util.UploadFileUtils;
 import com.pknu.pro.util.Page;
@@ -201,6 +202,38 @@ public class GalleryServiceImpl implements GalleryService {
 		
 		return "community/gallery/content";
 	}
+
+	@Override
+	public String delete(Model model, String pageNum, String boardNum) {
+		galleryDao.delete(Integer.parseInt(boardNum));
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("message", "삭제되었습니다.");
+		model.addAttribute("url", "list.do?pageNum="+pageNum);
+		return "etc/message";
+	}
+
+	@Override
+	public String updateForm(Model model, String pageNum, String boardNum) {
+		Map<String, Integer> hm = new HashMap<>();
+		hm.put("kind", 2);
+		hm.put("boardNum", Integer.parseInt(boardNum));
+		boardDto = galleryDao.getBoard(hm);
+		fileList = galleryDao.getFileList(Integer.parseInt(boardNum));
+		
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("boardNum",boardNum);
+		model.addAttribute("board", boardDto);
+		model.addAttribute("file", fileList);
+		return "community/gallery/update";
+	}
+
+	@Override
+	public String update(HttpSession session, Model model, String pageNum, BoardDto boardDto,
+			MultipartHttpServletRequest mRequest, String ir1, UpdateDto updateDto) {
+		
+		return "";
+	}
+	
 	
 	
 }

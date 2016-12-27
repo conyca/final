@@ -17,4 +17,5 @@ public interface GalleryDao {
 	public void insertFile(FileDto fileDto);
 	public BoardDto getBoard(Map<String, Integer> hm);
 	public List<FileDto> getFileList(int boardNum);
+	public void delete(int boardNum);
 }
