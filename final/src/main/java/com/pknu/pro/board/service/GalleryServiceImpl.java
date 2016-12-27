@@ -79,7 +79,7 @@ public class GalleryServiceImpl implements GalleryService {
 	@Override
 	public String write(HttpSession session, Model model, String pageNum, BoardDto boardDto, MultipartHttpServletRequest mRequest , String ir1) {
 		int boardNum=0;
-
+		System.out.println("write");
 		boardDto.setKind(2);
 		boardDto.setWriter((String)session.getAttribute("id"));
 		char c = '"';

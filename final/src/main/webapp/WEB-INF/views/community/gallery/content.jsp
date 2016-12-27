@@ -135,7 +135,6 @@
 				<input type ="button" value="수정" onclick="location.href='updateForm.do?pageNum=${pageNum}&boardNum=${board.boardNum }'">
 				<input type ="button" value="삭제" onclick="onDelete();">
 			</c:if>
-			<input type="button" value = "답글" onclick="document.fr.submit();">
 			<input type="button" value ="목록" onclick="location.href='list.do?pageNum=${pageNum}'">
 		</div>
 	</article>
