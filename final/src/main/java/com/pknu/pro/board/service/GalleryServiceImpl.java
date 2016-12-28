@@ -114,7 +114,10 @@ public class GalleryServiceImpl implements GalleryService {
 		// 글 등록
 		if(mFile.get(0).isEmpty()){
 			galleryDao.write(boardDto);
-			boardNum = galleryDao.getCurrentBoardNum();
+			Map<String, Integer> hm2 = new HashMap<>();
+			hm2.put("kind", 2);
+			hm2.put("boardNo", maxNo);
+			boardNum = galleryDao.getCurrentBoardNum(hm2);
 		}else{	
 			boardNum = galleryDao.getNextBoardNum();
 			System.out.println(boardNum+"글등록");
@@ -230,6 +233,10 @@ public class GalleryServiceImpl implements GalleryService {
 	@Override
 	public String update(HttpSession session, Model model, String pageNum, BoardDto boardDto,
 			MultipartHttpServletRequest mRequest, String ir1, UpdateDto updateDto) {
+		char c = '"';
+		ir1 = ir1.replace("<img src="+c+"../", "<img src="+c+"/final/resources/");
+		boardDto.setContent(ir1);
+		
 		
 		return "";
 	}

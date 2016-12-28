@@ -29,9 +29,9 @@
 		select board_seq.nextval from dual
 	</select>
 	
-	<select id="getCurrentBoardNum" resultType="int">
-		select board_seq.currval from dual
-	</select>
+<!-- 	<select id="getCurrentBoardNum" resultType="int"> -->
+<!-- 		select board_seq.currval from dual -->
+<!-- 	</select> -->
 	
 	<select id="getBoardMaxNo" parameterType="int" resultType="integer">
 		SELECT MAX(boardNo) FROM board 
@@ -51,10 +51,10 @@
 				#{title}, #{content}, 0, 0, 0, sysdate, #{fileStatus}, 0)
 	</insert>
 	
-<!-- 	<select id="getCurrentBoardNum" parameterType="hashMap" resultType="int"> -->
-<!-- 		SELECT boardNum FROM board -->
-<!-- 		WHERE kind = #{kind} AND boardNo = #{boardNo} -->
-<!-- 	</select> -->
+	<select id="getCurrentBoardNum" parameterType="hashMap" resultType="int">
+		SELECT boardNum FROM board
+		WHERE kind = #{kind} AND boardNo = #{boardNo}
+	</select>
 	
 	<insert id="insertFile" parameterType="file">
 			INSERT INTO FILELIST 	

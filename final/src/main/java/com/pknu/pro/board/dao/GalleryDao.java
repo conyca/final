@@ -12,7 +12,7 @@ public interface GalleryDao {
 	public List<BoardDto> getBoards(Map<String, Object> hm );
 	public int getNextBoardNum();
 	public int write(BoardDto boardDto);
-	public int getCurrentBoardNum();
+	public int getCurrentBoardNum(Map<String, Integer> hm2);
 	public Integer getBoardMaxNo(int kind);
 	public void insertFile(FileDto fileDto);
 	public BoardDto getBoard(Map<String, Integer> hm);

@@ -40,10 +40,16 @@
 							<c:forEach items="${list }" var="item">
 								<li>
 									<span>${item.boardNo }</span>
-									<a href ="content.do?pageNum=${pageNum }&boardNum=${item.boardNum}">
-										<img src="displayFile.do?fileName=${item.fileName }">
-									</a>
-									
+									<c:if test="${item.fileStatus eq 1 }">
+										<a href ="content.do?pageNum=${pageNum }&boardNum=${item.boardNum}">
+											<img src="displayFile.do?fileName=${item.fileName }">
+										</a>
+									</c:if> 
+									<c:if test="${item.fileStatus eq 0 }">
+										<a href ="content.do?pageNum=${pageNum }&boardNum=${item.boardNum}">
+											<img width="90" height="90" src="/final/resources/img/board/list/noimg.png">
+										</a>
+									</c:if>
 									<span>
 										<a href ="content.do?pageNum=${pageNum }&boardNum=${item.boardNum}">
 											${item.title }
