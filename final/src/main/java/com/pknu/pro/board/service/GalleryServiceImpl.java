@@ -113,12 +113,16 @@ public class GalleryServiceImpl implements GalleryService {
 		
 		// 글 등록
 		if(mFile.get(0).isEmpty()){
+			System.out.println("isEmpty true");
+			//파일 업로드 없음
 			galleryDao.write(boardDto);
 			Map<String, Integer> hm2 = new HashMap<>();
 			hm2.put("kind", 2);
 			hm2.put("boardNo", maxNo);
 			boardNum = galleryDao.getCurrentBoardNum(hm2);
 		}else{	
+			System.out.println("isEmpty false");
+			//파일 업로드 있음
 			boardNum = galleryDao.getNextBoardNum();
 			System.out.println(boardNum+"글등록");
 			boardDto.setBoardNum(boardNum);
@@ -236,6 +240,8 @@ public class GalleryServiceImpl implements GalleryService {
 		char c = '"';
 		ir1 = ir1.replace("<img src="+c+"../", "<img src="+c+"/final/resources/");
 		boardDto.setContent(ir1);
+		
+		
 		
 		
 		return "";
